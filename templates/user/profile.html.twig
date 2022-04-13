@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div style="padding:8%;background: hsl(213deg 85% 97%);display: flex;flex-direction: column;border-radius: 30px;box-shadow: 0 0 2em hsl(231deg 62% 94%);">
+    <div style ="user-select: none;overflow-y: hidden;display: flex;justify-content: center;align-items: center;background-color: white;height: 70vh;">
+        <bodyDiv style="height:100%;width:100%;font-family: Acme, serif;min-width:700px;">
+            <div style="height:100%;width:100%;display:inline-block">
+                <div class="row">
+                    <div class="col-md-3 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                            <h4>Welcome back, {{ app.user.nameuser }}</h4>
+                            <img class="rounded-circle mt-5" src="https://robohash.org/{{app.user.emailuser}}" width="90">
+                            <span class="font-weight-bold">{{ app.user.nameuser }} {{ app.user.lastnameuser }} </span>
+                            <span class="text-black-50">{{ app.user.emailuser }}</span>
+                            <span>Tunisia</span></div>
+                    </div>
+                    <div class="col-md-5" >
+                        <div class="p-2 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Edit your profile</h4>
+                            </div>
+        <div class="image-area mt-4">
+            <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" style="height: 40vh;align-items:center;" >
+            <div  style="padding-top:12px;">
+                {% if form is defined %}
+                 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+                               {{ form_row(form.profilepicuser ,
+        { 'attr':
+            {
+                'placeholder': '...',
+                'accept':'file',
+                'onchange':'readURL(this);',
+            }
+        }) }}
+                <div class="row mt-2">
+                        <div class="col-md-6">
+
+        <td>{{ form_label(form.nameuser,"Name")}}</td>
+        <td>{{ form_errors(form.nameuser) }}</td>
+        <td>{{ form_widget(form.nameuser)}} </td>
+        </div>
+       <div class="col-md-6">
+        <td> {{ form_label(form.lastnameuser,"Last Name")}} </td>
+        <td>  {{ form_errors(form.lastnameuser) }} </td>
+        <td> {{ form_widget(form.lastnameuser)}}   </td>
+                    {{ form_end(form) }}
+                     </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="email" value={{ app.user.emailuser }} disabled ></div>
+                             </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="Tunisia" value=Tunisia disabled ></div>
+                        <div class="col-md-6"><label class="labels">Account Status</label><input type="text" class="form-control" placeholder="Active" value=Active disabled></div>
+                    </div>
+                    <div class="mt-3 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                </div>
+                    </div>
+                 </div>
+            {% endif %}
+            </div>
+            </div>
+             </div>
+             </div>
+           </bodyDiv>
+            </div>
+    </div>
+{% endblock %}

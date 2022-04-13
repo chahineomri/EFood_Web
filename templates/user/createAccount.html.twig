@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="padding:8%;background: hsl(213deg 85% 97%);display: flex;flex-direction: column;border-radius: 30px;box-shadow: 0 0 2em hsl(231deg 62% 94%);">
+    <div style ="user-select: none;overflow-y: hidden;display: flex;justify-content: center;align-items: center;background: hsl(218deg 50% 91%);height: 100vh;">
+    <bodyDiv style="height:100%;width:100%;font-family: Acme, serif;min-width:700px;">
+    <div style="height:100%;width:100%;display:inline-block">
+    <div class="splitdiv" id="leftdiv" style="height: 100%;width: 50%;top:0;overflow-x: hidden; float:left;background-color:#FAFAFA;">
+        <div id="leftdivcard" style="margin:0 auto;width:100%;">
+            <h3 style="padding-top:5%;text-align:center;font-family:Lobster; color:#051922;">Create account</h3>
+            {{ form_start(formA,{'attr': {'novalidate': 'novalidate'}}) }}
+            <tr>
+                <div class="image-area mt-4">
+                <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" style="height: 40vh;align-items:center;" >
+                <div  style="padding-top:12px;">
+                  {{ form_row(formA.profilepicuser ,
+                        { 'attr':
+                            {
+                                'placeholder': '...',
+                                'accept':'file',
+                                'onchange':'readURL(this);',
+                            }
+                        }) }}
+                </div>
+
+                </div>
+            </tr>
+            <tr>
+
+            <td>{{ form_label(formA.nameuser,"Name")}}</td>
+            <td>{{ form_errors(formA.nameuser) }}</td>
+            <td>{{ form_widget(formA.nameuser)}} </td>
+            </tr>
+
+            <tr>
+            <td> {{ form_label(formA.lastnameuser,"Last Name")}} </td>
+            <td>  {{ form_errors(formA.lastnameuser) }} </td>
+            <td> {{ form_widget(formA.lastnameuser)}}   </td>
+            </tr>
+
+            <tr>
+            <td> {{ form_label(formA.emailuser,"Email")}} </td>
+            <td> {{ form_errors(formA.emailuser) }} </td>
+            <td> {{ form_widget(formA.emailuser)}}   </td>
+            </tr>
+
+            <tr>
+            <td>  {{ form_errors(formA.plainPassword)}} </td>
+            <td>  {{ form_widget(formA.plainPassword)}}   </td>
+            </tr>
+
+            <tr>
+                <td>  {{ form_label(formA.userrole,"Register as")}} </td>
+                <td>  {{ form_errors(formA.userrole) }} </td>
+                <td> {{ form_widget(formA.userrole)}}   </td>
+            </tr>
+
+            <tr>
+                <td>  {{ form_label(formA.userstatus,"Status")}} </td>
+                <td>  {{ form_errors(formA.userstatus) }} </td>
+                <td> {{ form_widget(formA.userstatus)}}   </td>
+            </tr>
+        {{ form_end(formA) }}
+        <button type="submit" style="border-radius: 20px;border: 1px solid #051922;background-color: #051922;color: #FFFFFF;font-size: 12px;font-weight: bold;padding: 5px 45px ;letter-spacing: 1px;text-transform: uppercase;transition: transform 80ms ease-in;position:relative;left:70%">Sign Up</button>
+    </div>
+    </div>
+    </div>
+    </bodyDiv>
+    </div>
+    </div>
+
+{% endblock %}

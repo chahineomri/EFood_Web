@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div style="padding:8%;background: hsl(213deg 85% 97%);display: flex;flex-direction: column;border-radius: 30px;box-shadow: 0 0 2em hsl(231deg 62% 94%);">
+    <div style ="user-select: none;overflow-y: hidden;display: flex;justify-content: center;align-items: center;background: hsl(218deg 50% 91%);height: 100vh;">
+        <bodyDiv style="height:100%;width:100%;font-family: Acme, serif;min-width:700px;">
+            <div style="height:100%;width:100%;display:inline-block">
+                <div class="splitdiv" id="leftdiv" style="height: 100%;width: 50%;top:0;overflow-x: hidden; float:left;background-color:#FAFAFA;">
+                    <div id="leftdivcard" style="margin:0 auto;width:100%;">
+                        <div class="limiter">
+                            <div class="container-login100">
+                                <div class="wrap-login100">
+                                    <form class="login100-form validate-form" method="post">
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+					<span class="login100-form-logo"></span>
+                                        <span class="login100-form-title p-b-34 p-t-27">Log in</span>
+                                        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                                            <input class="input100" type="email" name="email" placeholder="Email" id="inputEmail" value="{{ last_username }}" required autofocus>
+                                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                                        </div>
+                                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                            <input class="input100" type="password" name="password" placeholder="Password" id="inputPassword" required>
+                                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                                        </div>
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}"
+                                        >
+                                        <div class="contact100-form-checkbox">
+                                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="_remember_me">
+                                            <label class="label-checkbox100" for="ckb1">
+                                                Remember me
+                                            </label>
+                                        </div>
+                                        <div class="container-login100-form-btn">
+                                            <button class="login100-form-btn">
+                                                Login
+                                            </button>
+                                        </div>
+                                        <div class="text-center p-t-90">
+                                            <a class="txt1" href="#">
+                                                Forgot Password?
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </bodyDiv>
+    </div>
+</div>
+{% endblock %}
