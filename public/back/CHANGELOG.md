@@ -1,31 +1,26 @@
-## [2.2.0] 2020-10-08
-### Updates
-- update to Angular 10
-- update all dependencies to match Angular 10 version
+# Change Log
 
-## [2.1.0] 2020-03-16
-### Updates
-- update to Angular 9
-- update all dependencies to match Angular 9 version
+## [2.0.1] 27.03.2020
+### Broken links fixing
+- Solve the backlinks errors
+- Small change for documentation
 
-## [2.0.0] 2019-17-07
-### Updates
-- update from Bootstrap 3 to Bootstrap 4
-- update to Angular 8
-- update all dependencies to match Angular 8 version
-- change the product structure
-### Added
-- useHash
-- online doc
-- paper 2 styles
-- fixed plugin
-- copyright
-- issue_template
-### Bug Fixing
-- fix sidebar scroll
+## [2.0.0] 22.05.2018
+### Bootstrap 4.1.1 integration & Bug Fixing
+- Small changes for components
+- ChartJS plugin integration
+- Gulp task integration to open the project in browser
+- Added License for Nucleo Icons
+- Small changes on design of Cards
 
-## [1.0.1] 2017-12-07
-- fixed errors for npm start
+## [1.0.2] 08.03.2017
+ - added documentation files
 
-## [1.0.0] 2017-06-27
-### Initial Release
+## [1.0.1] 30.09.2016
+### Bugfixing, Improvements
+- New Page [current version]
+- added Upgrade to PRO page for those who want to upsell inside the dashboard
+- switched to MIT license
+
+## [1.0.0] 29.03.2016
+### Original Release

@@ -37,7 +37,9 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \Exception('logout() should never be reached');
+
+        return $this->render('user/Login.html.twig');
+
     }
 
 }

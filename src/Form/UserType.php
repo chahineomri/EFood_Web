@@ -89,11 +89,12 @@ class UserType extends AbstractType
         ])
         ->add('agreeTerms', CheckboxType::class,[
         'mapped' => false,
-        'constraints' => [
+            'data' => true,
+            'constraints' => [
         new IsTrue([
             'message' => 'You must agree to our terms.'
             ])
-        ]])
+        ],])
         ;
     }
 

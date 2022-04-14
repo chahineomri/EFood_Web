@@ -11,6 +11,8 @@ use phpDocumentor\Reflection\Type;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UserController extends AbstractController
 {
+
     /**
      * @Route("/user", name="user")
      */
@@ -32,13 +35,12 @@ class UserController extends AbstractController
         ]);
     }
     /**
-     * @Route("/createAccount", name="createAccount")
+     * @Route("/createAccount", name="app_createAccount")
      */
     public function createAccount(Request $request,UserPasswordEncoderInterface $passwordEncoder,uploader $uploader)
     {
         $user=new User();
         $form = $this->createForm(UserType::class,$user);
-        $form->add('Submit',SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()) {
             $user = $form->getData();
@@ -65,7 +67,7 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/{id}/edit", name="app_user_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, User $user,UserPasswordEncoderInterface $passwordEncoder,uploader $uploader): Response
+    public function edit(Request $request, User $user,UserPasswordEncoderInterface $passwordEncoder,uploader $uploader)
     {
         $form = $this->createForm(UserTypeUpdateType::class,$user);
         $form->handleRequest($request);
@@ -86,8 +88,30 @@ class UserController extends AbstractController
             ]);
 
         }
-        return $this->render('user/profile.html.twig', array(
+        return $this->render('user/edit.html.twig', array(
             'form' => $form->createView()));
 
     }
+    /**
+     * @Route("/profile/{id}/delete", name="app_user_delete")
+     */
+    public function deleteUser($id)
+    {
+         $currentUserId = $this->getUser()->getId();
+        $session = $this->get('session');
+
+        if ($currentUserId == $id)
+        {
+            $session = new Session();
+            $session->invalidate();
+        }
+        $em = $this->getDoctrine()->getManager();
+        $usrRepo = $em->getRepository(User::class);
+        $user = $usrRepo->find($id);
+        $em->remove($user);
+        $em->flush();
+        $session->invalidate();
+        return $this->redirectToRoute('app_login');
+    }
+
 }

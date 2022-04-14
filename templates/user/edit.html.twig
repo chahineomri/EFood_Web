@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% if form is defined %}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(form.profilepicuser ,
+        { 'attr':
+            {
+                'placeholder': '...',
+                'accept':'file',
+                'onchange':'readURL(this);',
+            }
+        }) }}
+    <div class="row mt-2">
+    <div class="col-md-6">
+
+        <td>{{ form_label(form.nameuser,"Name")}}</td>
+        <td>{{ form_errors(form.nameuser) }}</td>
+        <td>{{ form_widget(form.nameuser)}} </td>
+    </div>
+    <div class="col-md-6">
+        <td> {{ form_label(form.lastnameuser,"Last Name")}} </td>
+        <td>  {{ form_errors(form.lastnameuser) }} </td>
+        <td> {{ form_widget(form.lastnameuser)}}   </td>
+        {{ form_end(form) }}
+    </div>
+        <div class="mt-3 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+    {% endif %}
+{% endblock %}

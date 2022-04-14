@@ -6,16 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- title -->
-    <title>E_FOOD</title>
-    <title>{% block title %}Welcome!{% endblock %}</title>
         <!-- favicon -->
         <link rel="shortcut icon" type="image/png" href="front/assets/img/favicon.png">
         <!-- google font -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
         <!-- fontawesome -->
-        <link rel="stylesheet" href="front/assets/css/all.min.css">
+        <link rel="stylesheet" href="front/assets/fonts/font-awesome-4.7.0/css/font-awesome.css">
         <!-- bootstrap -->
         <link rel="stylesheet" href="front/assets/bootstrap/css/bootstrap.min.css">
         <!-- owl carousel -->
@@ -49,6 +46,13 @@
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="front/assets/css/util.css">
         <link rel="stylesheet" type="text/css" href="front/assets/css/main.css">
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="back/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="back/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+
 
 
     {% block javascripts %}
@@ -74,10 +78,33 @@
                 });
            });
         </script>
+        <script>
+            addEventListener('click', e => {
+                if (e.target.className === 'fa fa-trash-o fa-fw') {
+                    if (confirm('Are you sure?')) {
+                        const id = e.target.getAttribute('data-id');
+                        fetch(`/profile/delete/${id}`, {
+                            method: 'DELETE'
+                        }).then(res => window.location.reload());}}});}
+        </script>
     {% endblock %}
+
+
+<!--   Core JS Files   -->
+<script src="back/assets/js/core/jquery.min.js"></script>
+<script src="back/assets/js/core/popper.min.js"></script>
+<script src="back/assets/js/core/bootstrap.min.js"></script>
+<script src="back/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="back/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="back/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="back/assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
 </head>
 <body>
-
 <!-- header -->
 {% block header %}
 <div class="top-header-area" id="sticker">
@@ -87,55 +114,36 @@
                 <div class="main-menu-wrap">
                     <!-- logo -->
                     <div class="site-logo">
-                        <a href="front/index.html">
-                            E-Food
-                        </a>
+                        <a class="site-logo" style="color: #FF8C00;"> <img src= "uploads/profilepics/LoginPicture.png"style="width:50px;height:40px;">EFood</a>
                     </div>
                     <!-- logo -->
                     <!-- menu start -->
                     <nav class="main-menu">
                         <ul>
-                            <li class="current-list-item"><a href="#">Home</a>
+                            <li class="current-list-item"><a href="#">Home</a></li>
+                            <li class="current-list-item"><a href="#">About</a></li>
+                            <li class="current-list-item"><a href="#">Restaurants</a>
                                 <ul class="sub-menu">
-                                    <li><a href="front/index.html">Static Home</a></li>
-                                    <li><a href="front/index_2.html">Slider Home</a></li>
+                                    <li><a href="#l">Our Restaurants</a></li>
+                                    <li><a href="#">Our Menus</a></li>
                                 </ul>
                             </li>
-                            <li><a href="front/about.html">About</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="current-list-item"><a href="#">Contact</a></li>
+                            <li class="current-list-item"><a href="#">Order</a>
                                 <ul class="sub-menu">
-                                    <li><a href="front/404.html">404 page</a></li>
-                                    <li><a href="front/about.html">About</a></li>
-                                    <li><a href="front/cart.html">Cart</a></li>
-                                    <li><a href="front/checkout.html">Check Out</a></li>
-                                    <li><a href="front/contact.html">Contact</a></li>
-                                    <li><a href="front/news.html">News</a></li>
-                                    <li><a href="front/shop.html">Shop</a></li>
+                                    <li><a href="#">Order</a></li>
+                                    <li><a href="#">Check Out</a></li>
+                                    <li><a href=#">Single Product</a></li>
+                                    <li><a href="#">Cart</a></li>
                                 </ul>
                             </li>
-                            <li><a href="front/news.html">News</a>
-                                <ul class="sub-menu">
-                                    <li><a href="front/news.html">News</a></li>
-                                    <li><a href="front/single-news.html">Single News</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="front/contact.html">Contact</a></li>
-                            <li><a href="front/shop.html">Shop</a>
-                                <ul class="sub-menu">
-                                    <li><a href="front/shop.html">Shop</a></li>
-                                    <li><a href="front/checkout.html">Check Out</a></li>
-                                    <li><a href=front/"single-product.html">Single Product</a></li>
-                                    <li><a href="front/cart.html">Cart</a></li>
-                                </ul>
-                            </li>
-
-                                <li>
-                                <a  aria-hidden="true"> <i   class="fa fa-user fa-fw"></i> {{app.user.nameuser}}</a>
-                                <ul class="sub-menu">
                                     {% if is_granted('ROLE_USER') %}
-                                        <li><a class="dropdown-item" href="{{ path('app_profile') }}"><i class="fa fa-user fa-fw"></i>Profile</a> </li>
-                                        <li> <a class="dropdown-item" href="{{ path('app_user_edit', {id: app.user.iduser}) }}"><i class="fa fa-pencil"></i>Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+                                   <li> <a aria-hidden="true"> <i class="fa fa-user fa-fw"></i> {{app.user.nameuser}}</a>
+                                   <ul class="sub-menu">
+                                        <li><a class="dropdown-item" href="{{ path('app_profile') }}"><i class="fa fa-user fa-fw"></i> Profile </a> </li>
+                                        <li> <a class="dropdown-item" href="{{ path('app_user_edit', {id: app.user.iduser}) }}"><i class="fa fa-pencil"></i> Edit Account </a></li>
+                                        <li><a class="shopping-cart" href="#"><i class="fa fa-shopping-cart"></i> Cart </a></li>
+                                        <li> <a class="mobile-hide search-bar-icon" href="#"><i class="fa fa-search"></i> Search </a></li>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <li> <a class="dropdown-item" href="#">Create Post</a> </li>
                                         <li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
@@ -144,18 +152,15 @@
                                     {% endif %}
                                         <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a> </li>
                                     {% else %}
-                                        <li class="nav-item">
-                                            <a style="color: #fff;" class="nav-link" href="{{ path('app_login') }}">Login</a>
+                                        <li> <a aria-hidden="true"> <i class="fa fa-user fa-fw"></i> </a>
+                                            <ul class="sub-menu">
+                                                <li> <a class="dropdown-item" href="{{ path('app_login') }}"><i class="fa fa-sign-in"></i> Login </a></li>
+                                                <li> <a class="dropdown-item" href="{{ path('app_createAccount') }}"><i class="fa fa-user-plus"></i> Sign Up </a></li>
+                                            </ul>
+                                        </li>
+                                        </ul>
                                         </li>
                                     {% endif %}
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="header-icons">
-                                    <a class="shopping-cart" href="front/cart.html"><i class="fas fa-shopping-cart"></i></a>
-                                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-                                </div>
-                            </li>
                         </ul>
                     </nav>
                     <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
@@ -185,7 +190,7 @@
             </div>
         </div>
     </div>
-    <!-- end search arewa -->
+    <!-- end search area -->
 
 {% endblock %}
 {% for message in app.flashes('success') %}
@@ -203,18 +208,18 @@
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                 <div class="list-box d-flex align-items-center">
                     <div class="list-icon">
-                        <i class="fas fa-shipping-fast"></i>
+                        <i class="fa fa-truck"></i>
                     </div>
                     <div class="content">
                         <h3>Free Shipping</h3>
-                        <p>When order over $75</p>
+                        <p>When order over 100 Tunisian Dinars</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                 <div class="list-box d-flex align-items-center">
                     <div class="list-icon">
-                        <i class="fas fa-phone-volume"></i>
+                        <i class="fa fa-phone"></i>
                     </div>
                     <div class="content">
                         <h3>24/7 Support</h3>
@@ -225,11 +230,11 @@
             <div class="col-lg-4 col-md-6">
                 <div class="list-box d-flex justify-content-start align-items-center">
                     <div class="list-icon">
-                        <i class="fas fa-sync"></i>
+                        <i class="fa fa-handshake-o"></i>
                     </div>
                     <div class="content">
                         <h3>Refund</h3>
-                        <p>Get refund within 3 days!</p>
+                        <p>Get refund!</p>
                     </div>
                 </div>
             </div>
@@ -242,16 +247,16 @@
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box about-widget">
                     <h2 class="widget-title">About us</h2>
-                    <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                    <p> We are not just another online food delivery shop! </p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box get-in-touch">
                     <h2 class="widget-title">Get in Touch</h2>
                     <ul>
-                        <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                        <li>support@fruitkha.com</li>
-                        <li>+00 111 222 3333</li>
+                        <li>34/8, Esprit, Ariana, Tunisie.</li>
+                        <li>efoodappproject@gmail.com</li>
+                        <li>+216 93682046</li>
                     </ul>
                 </div>
             </div>
@@ -259,21 +264,21 @@
                 <div class="footer-box pages">
                     <h2 class="widget-title">Pages</h2>
                     <ul>
-                        <li><a href="front/index.html">Home</a></li>
-                        <li><a href="front/about.html">About</a></li>
-                        <li><a href="front/services.html">Shop</a></li>
-                        <li><a href="front/news.html">News</a></li>
-                        <li><a href="front/contact.html">Contact</a></li>
+                        <li><i class="fa fa-home" ></i><a href="#"> Home </a></li>
+                        <li><i class="fa fa-comment-o" aria-hidden="true"></i><a href="#"> About </a></li>
+                        <li><i class="fa fa-shopping-cart" aria-hidden="true"></i><a href="#"> Shop </a></li>
+                        <li><i class="fa fa-star-o" aria-hidden="true"></i><a href="#"> News </a></li>
+                        <li><i class="fa fa-address-book" aria-hidden="true"></i><a href="#"> Contact </a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box subscribe">
                     <h2 class="widget-title">Subscribe</h2>
-                    <p>Subscribe to our mailing list to get the latest updates.</p>
-                    <form action="front/index.html">
+                    <p>Subscribe to our mailing list to get the latest coupons and sales.</p>
+                    <form action="#">
                         <input type="email" placeholder="Email">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        <button type="submit"><i class="fa fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
