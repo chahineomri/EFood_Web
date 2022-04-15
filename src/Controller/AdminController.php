@@ -37,7 +37,7 @@ class AdminController extends AbstractController
     /**
      *
      * @Route("/{iduser}", name="app_admin_delete", methods={"POST"})
-     */
+
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getIduser(), $request->request->get('_token'))) {
@@ -45,5 +45,5 @@ class AdminController extends AbstractController
         }
         return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
     }
-
+     */
 }

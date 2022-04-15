@@ -21,17 +21,17 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends AbstractController
 {
 
     /**
-     * @Route("/user", name="user_app")
+     * @Route("/user", name="user")
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+        return $this->render('user/profile.html.twig', [
+            'controller_name' => 'UserController',
         ]);
     }
     /**
@@ -56,7 +56,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'Profile Created!');
-            return $this->render('user/profile.html.twig', array(
+            return $this->render('user/createAccount.html.twig', array(
                 'formA' => $form->createView()));
          }
         return $this->render('user/createAccount.html.twig', array(
@@ -97,7 +97,7 @@ class UserController extends AbstractController
      */
     public function deleteUser($id)
     {
-         $currentUserId = $this->getUser()->getId();
+        $currentUserId = $this->getUser()->getId();
         $session = $this->get('session');
 
         if ($currentUserId == $id)
@@ -110,6 +110,8 @@ class UserController extends AbstractController
         $user = $usrRepo->find($id);
         $em->remove($user);
         $em->flush();
+        $session->invalidate();
+        return $this->redirectToRoute('app_login');
     }
 
 }
