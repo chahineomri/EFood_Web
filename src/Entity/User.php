@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 
@@ -16,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user", uniqueConstraints={
  * @ORM\UniqueConstraint(name="EmailUser", columns={"EmailUser"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ParamConverter("user", options={"id" = "iduser"})
  * @method bool needsRehash(UserInterface $user)
  */
 class User implements UserInterface, UserPasswordEncoderInterface

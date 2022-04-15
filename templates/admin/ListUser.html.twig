@@ -1,69 +1,48 @@
 {% extends 'back.html.twig' %}
 
-{% block title %}list Users{% endblock %}
+{% block title %}User{% endblock %}
 
 {% block body %}
 
-    <table border ="1" id="t" class="table table-hover table-dark">
-        <thead class="thead-dark">
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
         <tr>
-            <td > name</td>
-            <td >last name</td>
-            <td >email</td>
-            <td >picture</td>
-            <td >password</td>
-            <td >role</td>
-            <td >status</td>
+            <th>Id</th>
+            <td>{{ user.iduser }}</td>
         </tr>
-        </thead>
-        <tbody id="all">
-        {% for user in users %}
-            <tr>
-
-                <td>
-
-                    {{ user.nameuser }}
-
-                </td>
-                <td>
-
-                    {{ user.lastnameuser }}
-
-                </td>
-                <td>
-
-                    {{ user.emailuser }}
-
-                </td>
-                <td>
-
-                    {{ user.profilepicuser }}
-
-                </td>
-                <td>
-
-                    {{ user.passworduser }}
-
-                </td>
-                <td>
-
-                    {{ user.userrole }}
-
-                </td>
-                <td>
-
-                    {{ user.userstatus }}
-
-                </td>
-                {#
-                <td>
-                <a href="{{ path('updateStudent', {'id': student.id}) }}"> modifier</a>
-                <a href="{{ path('deleteStudent', {'id': student.id}) }}"> supprimer</a>
-                   </td>
-                #}
-
-            </tr>
-        {% endfor %}
+        <tr>
+            <th>Name</th>
+            <td>{{ user.nameuser }}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{ user.lastnameuser }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.emailuser }}</td>
+        </tr>
+        <tr>
+            <th>Profile Picture</th>
+            <td>{{ user.profilepicuser }}</td>
+        </tr>
+        <tr>
+            <th>Role</th>
+            <td>{{ user.userrole }}</td>
+        </tr>
+        <tr>
+            <th>Status/th>
+            <td>{{ user.userstatus ? 'Activated' : 'Blocked' }}</td>
+        </tr>
+        <tr>
+            <th>Agreed Terms At</th>
+            <td>{{ user.agreedTermsAt ? user.agreedTermsAt|date('Y-m-d') : '' }}</td>
+        </tr>
         </tbody>
     </table>
+
+
+    {{ include('admin/_delete_form.html.twig') }}
 {% endblock %}

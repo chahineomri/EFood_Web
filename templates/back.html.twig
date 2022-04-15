@@ -14,6 +14,7 @@
     <!-- CSS Files -->
     <link href="back/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="back/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link href="back/assets/css/list.css" rel="stylesheet" />
     <!--   Core JS Files   -->
     <script src="back/assets/js/core/jquery.min.js"></script>
     <script src="back/assets/js/core/popper.min.js"></script>
@@ -34,37 +35,43 @@
 <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
         <div class="logo">
-            <a href="https://www.creative-tim.com" class="simple-text logo-mini">
-                <!-- <div class="logo-image-small">
-                  <img src="./assets/img/logo-small.png">
-                </div> -->
-                <!-- <p>CT</p> -->
-            </a>
-            <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-                Your Logo
-                <!-- <div class="logo-image-big">
-                  <img src="../assets/img/logo-big.png">
-                </div> -->
+            <a class="simple-text logo-mini">
+                 <div class="logo-image-small">
+                  <img src="uploads/profilepics/LoginPicture.png">
+                </div>
+              <p>EFood</p>
             </a>
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="active ">
-                    <a href="javascript:;">
-                        <i class="nc-icon nc-bank"></i>
-                        <p>First Item</p>
+                    <a href="{{ path('app_admin') }}">
+                        <i class="nc-icon nc-tile-56"></i>
+                        <p>Users List</p>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <i class="nc-icon nc-diamond"></i>
-                        <p>Second Item</p>
+                        <i class="nc-icon nc-chart-pie-36"></i>
+                        <p>Stats</p>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <i class="nc-icon nc-pin-3"></i>
-                        <p>Third Item</p>
+                        <i class="nc-icon nc-chat-33"></i>
+                        <p>Chat</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="nc-icon nc-bulb-63"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="nc-icon nc-cloud-download-93"></i>
+                        <p>Export</p>
                     </a>
                 </li>
             </ul>
@@ -82,7 +89,6 @@
                             <span class="navbar-toggler-bar bar3"></span>
                         </button>
                     </div>
-                    <a class="navbar-brand" href="javascript:;">Title</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>

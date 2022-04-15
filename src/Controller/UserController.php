@@ -26,12 +26,12 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route("/user", name="user")
+     * @Route("/user", name="user_app")
      */
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/profile.html.twig', [
-            'controller_name' => 'UserController',
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findAll(),
         ]);
     }
     /**
@@ -56,7 +56,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'Profile Created!');
-            return $this->render('user/createAccount.html.twig', array(
+            return $this->render('user/profile.html.twig', array(
                 'formA' => $form->createView()));
          }
         return $this->render('user/createAccount.html.twig', array(
@@ -110,8 +110,6 @@ class UserController extends AbstractController
         $user = $usrRepo->find($id);
         $em->remove($user);
         $em->flush();
-        $session->invalidate();
-        return $this->redirectToRoute('app_login');
     }
 
 }
