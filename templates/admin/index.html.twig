@@ -1,5 +1,7 @@
 {% extends 'back.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block body %}
@@ -27,43 +29,53 @@
                             <tr>
                                 <td>
                                     <img src="uploads/profilepics/{{user.profilepicuser}}" alt="">
-                                    <a href="#" class="user-link"> {{ user.nameuser }} {{ user.lastnameuser }} </a>
-                                    <span class="user-subhead"> {{ user.userrole }} </span>
+                                    <a href="{{ path('app_admin_show',{'userID':user.iduser}) }}" class="user-link"> {{ user.nameuser }} {{ user.lastnameuser }} </a>
+                                    {% for role in user.userrole %}
+                                    {% if role == "ROLE_USER" %}
+                                        <span class="user-subhead"> Client </span>
+                                    {% elseif role == "ROLE_CHEF" %}
+                                        <span class="user-subhead"> Chef </span>
+                                    {% elseif role == "ROLE_DELIVERYGUY" %}
+                                        <span class="user-subhead"> Delivery Guy </span>
+                                    {% elseif role == "ROLE_ADMIN" %}
+                                        <span class="user-subhead"> Admin </span>
+                                    {% endif %}
+                                    {% endfor %}
                                 </td>
                                 <td>{{ user.agreedTermsAt ? user.agreedTermsAt|date('Y-m-d') : '' }}</td>
                                 <td class="text-center">
                                     <span class="label label-default"> {{ user.userstatus ? 'Active' : 'Blocked' }} </span>
                                 </td>
                                 <td>
-                                    <a href="#"> {{ user.emailuser }} </a>
+                                    <a href="mailto:{{ user.emailuser }}?subject=About your EFOOD account &cc=efoodappproject@agmail.com&body=Hi there {{ user.nameuser }} {{ user.lastnameuser }},"> {{ user.emailuser }} </a>
                                 </td>
                                 <td style="width: 20%;">
-
+                                    <a href="{{ path('app_admin_show',{'userID':user.iduser}) }}" class="table-link primary" >
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                             </span>
                                     </a>
-                                    <a href="#" class="table-link text-info">
+
+                                    <a href="{{ path('unban',{'userID':user.iduser}) }}" class="table-link text-info">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
                                             </span>
                                     </a>
-                                    <a href="#" class="table-link danger">
+                                    <a href="{{ path('ban',{'userID':user.iduser}) }}" class="table-link danger">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                <i class="fa fa-ban fa-stack-1x fa-inverse"></i>
                                             </span>
                                     </a>
                                 </td>
                             </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="10">no records found</td>
+                                    <td colspan="10">no users yet</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
                         </table>
-
                         {% endblock %}

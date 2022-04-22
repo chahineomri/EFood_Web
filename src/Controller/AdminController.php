@@ -4,12 +4,17 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class AdminController extends AbstractController
 {
     /**
@@ -21,16 +26,50 @@ class AdminController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/admin/ban/{userID}",
+     * defaults={"userID" = 0},
+     * name="ban")
+     */
+    public function banUserAction(MailerInterface $mailer,$userID){
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
+        $user->setUserstatus(0);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist( $user );
+        $em->flush();
+        $email = (new TemplatedEmail())
+            ->from('efoodappproject@gmail.com')
+            ->to($user->getEmailuser())
+            ->subject('Banned')
+            ->htmlTemplate('email/banned.html.twig');
+        $mailer->send($email);
+        return $this->redirectToRoute('app_admin');
+    }
+    /**
+     * @Route("/admin/unban/{userID}",
+     * defaults={"userID" = 0},
+     * name="unban")
+     */
+    public function unbanUserAction($userID){
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
+        $user->setUserstatus(1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist( $user );
+        $em->flush();
+        return $this->redirectToRoute('app_admin');
+    }
 
     /**
-     * @Route("/{iduser}", name="app_admin_show", methods={"GET"})
-
-    public function show(User $user): Response
+     * @Route("/admin/show/{userID}", name="app_admin_show", methods={"GET"})
+     */
+    public function show($userID,UserRepository $userRepository)
     {
-        return $this->render('admin/ListUser.html.twig', [
-            'user' => $user,
+        return $this->render('admin/ListUser.html.twig',[
+            'user' => $userRepository->find($userID)
         ]);
-    }  */
+    }
 
 
 

@@ -23,6 +23,10 @@ security:
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 2592000 # 30 days in seconds
+
+            user_checker: App\Controller\LoginFormAuthenticator
+
+
     encoders:
     # use your user class name here
         App\Entity\User:
@@ -39,5 +43,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
          # require the user to fully login to change password
         - { path: ^/change-password, roles: IS_AUTHENTICATED_FULLY }

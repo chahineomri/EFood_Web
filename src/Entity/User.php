@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -18,7 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
  * @ORM\UniqueConstraint(name="EmailUser", columns={"EmailUser"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ParamConverter("user", options={"id" = "iduser"})
- * @method bool needsRehash(UserInterface $user)
  */
 class User implements UserInterface, UserPasswordEncoderInterface
 {
@@ -70,11 +69,10 @@ class User implements UserInterface, UserPasswordEncoderInterface
     private $passworduser;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="UserRole", type="string", length=15, nullable=false)
+     * @ORM\Column(name="UserRole", type="json")
      */
-    private $userrole;
+    private $userrole=[];
 
     /**
      * @var bool
@@ -165,6 +163,7 @@ class User implements UserInterface, UserPasswordEncoderInterface
 
     /**
      * @param string|null $profilepicuser
+     * @return User
      */
     public function setProfilepicuser(?string $profilepicuser): self
     {
@@ -173,21 +172,36 @@ class User implements UserInterface, UserPasswordEncoderInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getUserrole(): ?string
+    public function getUserrole(): array
     {
-        return $this->userrole;
+        $userrole= $this->userrole;
+        $userrole[] = 'ROLE_USER';
+        return array_unique($userrole);
     }
 
     /**
-     * @param string $userrole
+     * @param array $userrole
+     * @return User
      */
-    public function setUserrole(string $userrole): void
+    public function setUserrole(array $userrole): self
     {
         $this->userrole = $userrole;
+        return $this;
     }
 
+    public function getRoles(): array
+    {
+        $userrole= $this->userrole;
+        $userrole[] = 'ROLE_USER';
+        return array_unique($userrole);
+    }
+    public function setRoles(array $userrole): self
+    {
+        $this->userrole = $userrole;
+        return $this;
+    }
 
     /**
      * @return bool
@@ -216,18 +230,7 @@ class User implements UserInterface, UserPasswordEncoderInterface
 
     }
 
-    public function getRoles(): array
-    {
-        $userrole = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $userrole[] = 'ROLE_USER';
-        return array_unique($userrole);
-    }
-    public function setRoles(array $userrole): self
-    {
-        $this->roles = $userrole;
-        return $this;
-    }
+
 
 public function getPassword(): ?string
 {
@@ -317,4 +320,5 @@ public function getPassword(): ?string
 
         return $this;
     }
+
 }

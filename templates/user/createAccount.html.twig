@@ -1,5 +1,29 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <!--     Fonts and icons     -->
 
+    <link rel="icon" type="image/png" href="{{ asset('front/login/images/icons/favicon.ico') }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/bootstrap/css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/animate/animate.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/css-hamburgers/hamburgers.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/animsition/css/animsition.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/select2/select2.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/daterangepicker/daterangepicker.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/css/main.css') }}">
+{% endblock %}
 {% block body %}
     <div style="background-color: #fff5e8;padding-top:8%;padding-left:8%;padding-right:8%;display: flex;flex-direction: column;border-radius: 30px;box-shadow: 0 0 2em hsl(231deg 62% 94%);">
     <div style ="user-select: none;overflow-y: hidden;display: flex;justify-content: center;align-items: center;background-color: #fff5e8;height: 100vh;">
@@ -9,12 +33,12 @@
         <div id="leftdivcard" style="margin:0 auto;width:100%;">
             <div style=" background-color: #fff5e8;">
                 <div style="align-items: center;">
-            <h3 style="padding-top:5%;text-align:center;font-family:Lobster; color:#051922;">Create your account</h3>
+            <h1 style="padding-bottom:5%;text-align:center;color:#051922;">Create your account</h1>
 
             {{ form_start(formA,{'attr': {'novalidate': 'novalidate'}}) }}
             <tr>
 
-                    <img id="imageResult" src="#" alt="Preview Profile Picture" class="img-fluid rounded shadow-sm mx-auto d-block" style="width:30vh;height:20vh;align-items:center;" >
+                    <img id="imageResult" src="#" alt="Preview Profile Picture" class="img-fluid rounded shadow-sm mx-auto d-block" style="width:20vh;height:20vh;align-items:center;" >
 
                 <div style="padding-top:12px;">  </div>
                     <tr>
@@ -90,7 +114,7 @@
                             <div class="wrap-login100" style="height: 100%; display:flex;flex-direction: column;justify-content: center; align-items: center;">
                     <h1 style="color:white; text-align: center;font-size: 50px;">Hello, Friend!</h1>
                     <p style="color:white;font-size: 14px;font-weight: 100;line-height: 20px;letter-spacing: 0.5px;margin: 20px 0 30px;">Already have an account? You can access it by simply logging in.</p>
-                    <button class="ghost" id="signUp" >
+                    <button class="login100-form-btn" id="signUp" >
                         <a class="dropdown-item" href="{{ path('app_login') }}" style="background: transparent" >Log In</a>
                     </button>
                 </div>

@@ -42,30 +42,17 @@ class UserTypeUpdateType extends AbstractType
                 'data_class' => null
             ])
 
-            ->add('plainPassword',RepeatedType::class,array (
-                'invalid_message' => 'The password fields must match.',
-                'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'allowNull' => false,
-                        'message' => 'Please enter your password!'
-                    ]),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Come on, you can think of a password longer than that!'
-                    ])
-                ],
-                'type' => PasswordType::class,
-                'first_options' => array(
-                    'attr' => ['placeholder' => 'Password '],
-                    'label' =>'Password '),
-                'second_options' => array(
-                    'attr' => ['placeholder' => 'Password Verification'],
-                    'label' => 'Password Verification '),
-            ));
 
-    }
-
+      ->add('oldPassword',PasswordType::class,[
+    'attr' => ['placeholder' => 'Enter your password to  update'],
+          'constraints' => [
+              new NotBlank([
+                  'allowNull' => false,
+                  'message' => 'Please enter your current password!'
+              ]),],
+       'mapped' => false,
+        ]);
+}
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

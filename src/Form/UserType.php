@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Unique;
+use Symfony\Component\Form\CallbackTransformer;
 
 class UserType extends AbstractType
 {
@@ -35,10 +37,9 @@ class UserType extends AbstractType
                   new NotBlank([
                       'allowNull' => false,
                       'message' => 'Please enter your email!'
-                  ])
+                  ]),
                 ])
             );
-
               $imageConstraints= [
                     new Image([
                         'maxSize' => '5M'
@@ -67,7 +68,8 @@ class UserType extends AbstractType
                     new Length([
                         'min' => 8,
                         'minMessage' => 'Come on, you can think of a password longer than that!'
-                    ])
+                    ]),
+                    'required' => true,
                     ],
                 'type' => PasswordType::class,
                     'first_options' => array(
@@ -78,10 +80,13 @@ class UserType extends AbstractType
                     'label' => 'Password Verification '),
             ))
             ->add('userrole',ChoiceType::class, [
+                'required' => true,
+                'multiple' => false,
+                'expanded' => false,
                 'choices'  => [
-                    'client' => 'client',
+                    'Client' => 'ROLE_USER',
                 ],
-            ])
+        ])
             ->add('userstatus',ChoiceType::class, [
             'choices'  => [
             'active account' => true,
@@ -96,8 +101,22 @@ class UserType extends AbstractType
             ])
         ],])
         ;
-    }
 
+        // Data transformer
+        $builder->get('userrole')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($userroleArray) {
+                    // transform the array to a string
+                    return  is_array($userroleArray) ? count($userroleArray) : null ;
+                },
+                function ($userroleString) {
+                    // transform the string back to an array
+                    return [$userroleString];
+                }
+            ));
+
+
+    }
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

@@ -22,6 +22,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
+
+
 class UserController extends AbstractController
 {
 
@@ -37,10 +44,9 @@ class UserController extends AbstractController
     /**
      * @Route("/createAccount", name="app_createAccount")
      */
-    public function createAccount(Request $request,UserPasswordEncoderInterface $passwordEncoder,uploader $uploader)
+    public function createAccount(MailerInterface $mailer,Request $request,UserPasswordEncoderInterface $passwordEncoder,uploader $uploader)
     {
-        $user=new User();
-        $form = $this->createForm(UserType::class,$user);
+        $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()) {
             $user = $form->getData();
@@ -55,6 +61,12 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            $email = (new TemplatedEmail())
+                ->from('efoodappproject@gmail.com')
+                ->to($user->getEmailuser())
+                ->subject('Profile created')
+                ->htmlTemplate('email/welcome.html.twig');
+            $mailer->send($email);
             $this->addFlash('success', 'Profile Created!');
             return $this->render('user/createAccount.html.twig', array(
                 'formA' => $form->createView()));
@@ -67,27 +79,39 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/{id}/edit", name="app_user_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, User $user,UserPasswordEncoderInterface $passwordEncoder,uploader $uploader)
+    public function edit(SweetAlertFactory $flasher,UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,Request $request, User $user,uploader $uploader)
     {
         $form = $this->createForm(UserTypeUpdateType::class,$user);
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()) {
             $user = $form->getData();
-            $user->setPassword($passwordEncoder->encodePassword($user, $form['plainPassword']->getData()));
             $uploadedFile = $form['profilepicuser']->getData();
             if ($uploadedFile) {
                 $newFilename = $uploader->uploadProfilePic($uploadedFile);
                 $user->setImageFilename($newFilename);
             }
+            $oldPassword = $form['oldPassword']->getData();
+            if($passwordEncoder->isPasswordValid($user,$oldPassword)){
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $this->addFlash('success', 'Profile updated!');
-            return $this->redirectToRoute('app_user_edit', [
+            $email = (new TemplatedEmail())
+                ->from('efoodappproject@gmail.com')
+                ->to($user->getEmailuser())
+                ->subject('Profile updated')
+                ->htmlTemplate('email/update.html.twig');
+            $mailer->send($email);
+            $flasher->addSuccess('Data has been saved successfully!');
+            return $this->redirectToRoute('app_profile', [
                 'id' => $user->getIduser(),
             ]);
 
         }
+            $this->addFlash('notice', 'Invalid password entered');
+            return $this->render('user/edit.html.twig', array(
+                'form' => $form->createView()));
+        }
+
         return $this->render('user/edit.html.twig', array(
             'form' => $form->createView()));
 

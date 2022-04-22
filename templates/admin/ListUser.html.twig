@@ -4,8 +4,7 @@
 
 {% block body %}
 
-    <h1>User</h1>
-
+    <h2> {{ user.nameuser }} {{ user.lastnameuser }} </h2>
     <table class="table">
         <tbody>
         <tr>
@@ -25,24 +24,31 @@
             <td>{{ user.emailuser }}</td>
         </tr>
         <tr>
-            <th>Profile Picture</th>
-            <td>{{ user.profilepicuser }}</td>
-        </tr>
-        <tr>
             <th>Role</th>
-            <td>{{ user.userrole }}</td>
+            {% for role in user.userrole %}
+                {% if role == "ROLE_USER" %}
+                    <td class="user-subhead"> Client </td>
+                {% elseif role == "ROLE_CHEF" %}
+                    <td class="user-subhead"> Chef </td>
+                {% elseif role == "ROLE_DELIVERYGUY" %}
+                    <td class="user-subhead"> Delivery Guy </td>
+                {% elseif role == "ROLE_ADMIN" %}
+                    <td class="user-subhead"> Admin </td>
+                {% endif %}
+            {% endfor %}
         </tr>
         <tr>
-            <th>Status/th>
+            <th>Status</th>
             <td>{{ user.userstatus ? 'Activated' : 'Blocked' }}</td>
         </tr>
         <tr>
             <th>Agreed Terms At</th>
             <td>{{ user.agreedTermsAt ? user.agreedTermsAt|date('Y-m-d') : '' }}</td>
         </tr>
+
         </tbody>
     </table>
+    <a href="{{ path('unban',{'userID':user.iduser}) }}" class="btn btn-success"> unblock </a>
+    <a href="{{ path('ban',{'userID':user.iduser}) }}" class="btn btn-danger">block </a>
 
-
-    {{ include('admin/_delete_form.html.twig') }}
 {% endblock %}
