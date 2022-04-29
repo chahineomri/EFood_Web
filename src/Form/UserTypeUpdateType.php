@@ -44,7 +44,7 @@ class UserTypeUpdateType extends AbstractType
 
 
       ->add('oldPassword',PasswordType::class,[
-    'attr' => ['placeholder' => 'Enter your password to  update'],
+    'attr' => ['placeholder' => 'Enter your password to update'],
           'constraints' => [
               new NotBlank([
                   'allowNull' => false,

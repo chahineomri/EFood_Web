@@ -197,6 +197,10 @@ class User implements UserInterface, UserPasswordEncoderInterface
         $userrole[] = 'ROLE_USER';
         return array_unique($userrole);
     }
+    /**
+     * @param array $userrole
+     * @return User
+     */
     public function setRoles(array $userrole): self
     {
         $this->userrole = $userrole;

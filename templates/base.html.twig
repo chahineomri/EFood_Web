@@ -183,16 +183,9 @@
 
 {% endblock %}
 
-{% for message in app.flashes('success') %}
-<div class="alert alert-success">
-    {{ message }}
-</div>
-{% endfor %}
-{% for message in app.flashes('notice') %}
-    <div class="flash-notice">
-        {{ message }}
-    </div>
-{% endfor %}
+
+{{ flasher_render() }}
+
 
 {% block body %}
 {% endblock %}
@@ -272,9 +265,9 @@
                 <div class="footer-box subscribe">
                     <h2 class="widget-title">Subscribe</h2>
                     <p>Subscribe to our mailing list to get the latest coupons and sales.</p>
-                    <form action="#">
+                    <form  action="#" >
                         <input type="email" placeholder="Email">
-                        <button type="submit"><i class="fa fa-paper-plane"></i></button>
+                        <button type="submit" value="Submit" name="Submit"><i class="fa fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
@@ -287,11 +280,11 @@
             <div class="col-lg-6 text-right col-md-12">
                 <div class="social-icons">
                     <ul>
-                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://tlinkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://dribble.com/" target="_blank"><i class="fa fa-dribbble"></i></a></li>
                     </ul>
                 </div>
             </div>

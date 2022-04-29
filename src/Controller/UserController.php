@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\uploader;
 use App\Entity\User;
+use App\Form\UserPasswordChangeType;
 use App\Form\UserType;
 use App\Form\UserTypeUpdateType;
 use App\Repository\UserRepository;
@@ -16,6 +17,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -95,19 +97,22 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $email = (new TemplatedEmail())
+                $flasher->addSuccess('Your profile was updated successfully!');
+                $email = (new TemplatedEmail())
                 ->from('efoodappproject@gmail.com')
                 ->to($user->getEmailuser())
                 ->subject('Profile updated')
                 ->htmlTemplate('email/update.html.twig');
-            $mailer->send($email);
-            $flasher->addSuccess('Data has been saved successfully!');
-            return $this->redirectToRoute('app_profile', [
+                $mailer->send($email);
+                return $this->redirectToRoute('app_profile', [
                 'id' => $user->getIduser(),
             ]);
+            }
+            $flasher
+                ->error('The password entered does not match your current password')
+                ->priority(3)
+                ->flash();
 
-        }
-            $this->addFlash('notice', 'Invalid password entered');
             return $this->render('user/edit.html.twig', array(
                 'form' => $form->createView()));
         }
@@ -119,7 +124,7 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/{id}/delete", name="app_user_delete")
      */
-    public function deleteUser($id)
+    public function deleteUser(TokenStorageInterface $tokenStorage,$id)
     {
         $currentUserId = $this->getUser()->getId();
         $session = $this->get('session');
@@ -135,7 +140,47 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
         $session->invalidate();
+        $tokenStorage->setToken();
         return $this->redirectToRoute('app_login');
     }
+    /**
+     * @Route("/profile/{id}/passwordChange", name="app_user_passwordChange",methods={"GET", "POST"})
+     */
+    public function ChangePassword(SweetAlertFactory $flasher,UserPasswordEncoderInterface $passwordEncoder,MailerInterface $mailer,Request $request, User $user)
+    {
+        $form = $this->createForm(UserPasswordChangeType::class,$user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()&& $form->isValid()) {
+            $user = $form->getData();
+            $oldPassword = $form['oldPassword']->getData();
+            if($passwordEncoder->isPasswordValid($user,$oldPassword)){
+                $user->setPassword($passwordEncoder->encodePassword($user, $form['plainPassword']->getData()));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $flasher->addSuccess('Your password was updated successfully!');
+                $email = (new TemplatedEmail())
+                    ->from('efoodappproject@gmail.com')
+                    ->to($user->getEmailuser())
+                    ->subject('Password updated')
+                    ->htmlTemplate('email/update.html.twig');
+                $mailer->send($email);
+                return $this->redirectToRoute('app_profile', [
+                    'id' => $user->getIduser(),
+                ]);
+            }
+            $flasher
+                ->error('The password entered does not match your current password')
+                ->priority(3)
+                ->flash();
+            return $this->render('user/passwordChange.html.twig', array(
+                'form' => $form->createView()));
+        }
+
+        return $this->render('user/passwordChange.html.twig', array(
+            'form' => $form->createView()));
+
+    }
+
 
 }

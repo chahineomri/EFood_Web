@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,13 +32,14 @@ class AdminController extends AbstractController
      * defaults={"userID" = 0},
      * name="ban")
      */
-    public function banUserAction(MailerInterface $mailer,$userID){
+    public function banUserAction(SweetAlertFactory $flasher,MailerInterface $mailer,$userID){
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
         $user->setUserstatus(0);
         $em = $this->getDoctrine()->getManager();
         $em->persist( $user );
         $em->flush();
+        $flasher->addSuccess('User banned successfully!');
         $email = (new TemplatedEmail())
             ->from('efoodappproject@gmail.com')
             ->to($user->getEmailuser())
@@ -51,13 +53,14 @@ class AdminController extends AbstractController
      * defaults={"userID" = 0},
      * name="unban")
      */
-    public function unbanUserAction($userID){
+    public function unbanUserAction(SweetAlertFactory $flasher,$userID){
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
         $user->setUserstatus(1);
         $em = $this->getDoctrine()->getManager();
         $em->persist( $user );
         $em->flush();
+        $flasher->addSuccess('User unbanned successfully!');
         return $this->redirectToRoute('app_admin');
     }
 
