@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Coupoun</title>
+
+</head>
+<body>
+<h3 class="description">    OUR COUPOUNS</h3>
+<h1>Coupouns</h1>
+
+<table class="table">
+    <tbody>
+
+    <tr>
+        <th>TextCoupouns</th>
+        <td>{{ coupoun.textCoupouns }}</td>
+    </tr>
+    <tr>
+        <th>CodeCoupouns</th>
+        <img src="/public/img/qr-code">
+    </tr>
+    <tr>
+        <th>Date1</th>
+        <td>{{ coupoun.date1 ? coupoun.date1|date('Y-m-d') : ''  }}</td>
+    </tr>
+    <tr>
+        <th>Date2</th>
+        <td>{{ coupoun.date2 ? coupoun.date2|date('Y-m-d') : ''  }}</td>
+    </tr>
+    <tr>
+        <th>IdPromo1</th>
+        <td>{{ coupoun.idPromo1 }}</td>
+    </tr>
+    <tr>
+        <th>DureeCoupouns</th>
+        <td>{{ coupoun.dureeCoupouns }}</td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

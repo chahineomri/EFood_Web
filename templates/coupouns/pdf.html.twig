@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example 2</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+</head>
+
+{% block body %}
+    <header class="clearfix">
+
+        <div id="company">
+            <font color="orange">
+            <h2 class="name">E-FOOD</h2></font>
+            <div>455 Foggy Heights, AZ 85004, US</div>
+            <div>(602) 519-0450</div>
+            <div><a href="EFOOD@example.com">E-Food@gmail.com</a></div>
+        </div>
+        </div>
+    </header>
+<!-- End Navbar -->
+<style>
+    body {
+        font-family: Arial;
+    }
+
+    .coupon {
+        border: 5px dotted #bbb;
+        width: 80%;
+        border-radius: 15px;
+        margin: 0 auto;
+        max-width: 600px;
+    }
+
+    .container {
+        padding: 2px 16px;
+        background-color: #f1f1f1;
+    }
+
+    .promo {
+        background: #ccc;
+        padding: 3px;
+    }
+
+    .expire {
+        color: red;
+    }
+</style>
+</head>
+<body>
+<div class="coupon">
+    <div class="container">
+        <h3>Company Logo</h3>
+    </div>
+    <img src="/w3images/hamburger.jpg" alt="Avatar" style="width:100%;">
+    <div class="container" style="background-color:white">
+<font color="orange">
+<h1>The Coupoun</h1>
+</font>
+    </div>
+    <div class="container">
+        <table class="table">
+            <tbody>
+
+            <tr>
+                <font color="#adff2f"><th>Coupouns Name:</th> </font>
+                <td>{{ coupoun.textCoupouns }}</td>
+            </tr>
+            <tr>
+                <font color="#adff2f"><th>Coupouns code : </th> </font>
+                <td>{{ coupoun.textCoupouns }}</td>
+            </tr>
+            <tr>
+                <font color="#adff2f"> <th>Starting Date :</th> </font>
+                <td>{{ coupoun.date1 ? coupoun.date1|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <font color="#adff2f"> <th>Finishing Date</th> </font>
+                <td>{{ coupoun.date2 ? coupoun.date2|date('Y-m-d') : ''  }}</td>
+            </tr>
+
+            <tr>
+                <font color="#adff2f"> <th>Coupoun Duration</th> </font>
+                <td>{{ coupoun.dureeCoupouns }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
