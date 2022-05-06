@@ -45,7 +45,7 @@
 
     {% if form is defined %}
     {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
-                                        <img id="imageResult" alt="uploads/profilepics/{{app.user.profilepicuser}}"  class="img-fluid rounded shadow-sm mx-auto d-block" style="width:20vh;height:20vh;align-items:center;" >
+                                        <img id="imageResult" alt="profile pic preview"  class="img-fluid rounded shadow-sm mx-auto d-block" style="width:20vh;height:20vh;align-items:center;" >
                                         <div style="padding-top:12px;">  </div>
                                     <tr>
     {{ form_row(form.profilepicuser ,

@@ -53,7 +53,7 @@ class AdminController extends AbstractController
      * defaults={"userID" = 0},
      * name="unban")
      */
-    public function unbanUserAction(SweetAlertFactory $flasher,$userID){
+    public function unbanUserAction(SweetAlertFactory $flasher,MailerInterface $mailer,$userID){
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
         $user->setUserstatus(1);
@@ -61,6 +61,12 @@ class AdminController extends AbstractController
         $em->persist( $user );
         $em->flush();
         $flasher->addSuccess('User unbanned successfully!');
+        $email = (new TemplatedEmail())
+            ->from('efoodappproject@gmail.com')
+            ->to($user->getEmailuser())
+            ->subject('Profile updated')
+            ->htmlTemplate('email/unbanned.html.twig');
+        $mailer->send($email);
         return $this->redirectToRoute('app_admin');
     }
 

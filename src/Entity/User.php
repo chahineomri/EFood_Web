@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -28,6 +29,7 @@ class User implements UserInterface, UserPasswordEncoderInterface
      * @ORM\Column(name="IdUser", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $iduser;
 
@@ -35,6 +37,7 @@ class User implements UserInterface, UserPasswordEncoderInterface
      * @var string
      *
      * @ORM\Column(name="NameUser", type="string", nullable=false)
+     * @Groups("post:read")
      */
     private $nameuser;
 
@@ -42,6 +45,7 @@ class User implements UserInterface, UserPasswordEncoderInterface
      * @var string
      *
      * @ORM\Column(name="LastNameUser", type="string", nullable=false)
+     * @Groups("post:read")
      */
     private $lastnameuser;
 
@@ -53,6 +57,7 @@ class User implements UserInterface, UserPasswordEncoderInterface
      *  message = "The email '{{ value }}' is not a valid email.",
      *  checkMX = true
      * )
+     * @Groups("post:read")
      */
     private $emailuser;
 
@@ -60,17 +65,20 @@ class User implements UserInterface, UserPasswordEncoderInterface
      * @var string|null
      *
      * @ORM\Column(name="ProfilePicUser", type="string", length=200, nullable=true)
+     * @Groups("post:read")
      */
     private $profilepicuser;
 
     /**
      * @ORM\Column(name="PasswordUser",type="string",nullable=false)
+     * @Groups("post:read")
      */
     private $passworduser;
 
     /**
      *
      * @ORM\Column(name="UserRole", type="json")
+     * @Groups("post:read")
      */
     private $userrole=[];
 
@@ -78,11 +86,13 @@ class User implements UserInterface, UserPasswordEncoderInterface
      * @var bool
      *
      * @ORM\Column(name="UserStatus", type="boolean", nullable=false, options={"default"="1"})
+     * @Groups("post:read")
      */
     private $userstatus = true;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("post:read")
      */
     private $agreedTermsAt;
 

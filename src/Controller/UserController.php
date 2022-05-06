@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Controller\uploader;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Serializer;
 use App\Entity\User;
 use App\Form\UserPasswordChangeType;
 use App\Form\UserType;
@@ -14,12 +16,14 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -27,6 +31,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+
 
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
 
@@ -182,5 +189,28 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @Route("user/signin", name="app_signin")
+     * @throws ExceptionInterface
+     */
+public function signinAction(Request $request){
+    $email =$request->query->get("email");
+    $password =$request->query->get("password");
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository(User::class)->findOneBy(['emailuser'=>$email]);
+    if($user){
+        if (password_verify($password,$user->getPassword())){
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($user);
+            return new JsonResponse($formatted);
+        }
+        else {
+            return new Response("Password is incorrect");
+        }
+    }
+    else {
+        return new Response("Email is incorrect");
 
+    }
+}
 }
