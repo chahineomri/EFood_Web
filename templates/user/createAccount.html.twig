@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <!--     Fonts and icons     -->
+
+    <link rel="icon" type="image/png" href="{{ asset('front/login/images/icons/favicon.ico') }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/bootstrap/css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/animate/animate.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/css-hamburgers/hamburgers.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/animsition/css/animsition.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/select2/select2.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/vendor/daterangepicker/daterangepicker.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/login/css/main.css') }}">
+{% endblock %}
+{% block body %}
+    <div style="background-color: #fff5e8;padding-top:8%;padding-left:8%;padding-right:8%;display: flex;flex-direction: column;border-radius: 30px;box-shadow: 0 0 2em hsl(231deg 62% 94%);">
+    <div style ="user-select: none;overflow-y: hidden;display: flex;justify-content: center;align-items: center;background-color: #fff5e8;height: 100vh;">
+    <bodyDiv style="height:100%;width:100%;font-family: Acme, serif;min-width:700px;">
+    <div style="height:100%;width:100%;display:inline-block">
+    <div class="splitdiv" id="leftdiv" style="height: 100%;width: 50%;top:0;overflow-x: hidden; float:left;">
+        <div id="leftdivcard" style="margin:0 auto;width:100%;">
+            <div style=" background-color: #fff5e8;">
+                <div style="align-items: center;">
+            <h1 style="padding-bottom:5%;text-align:center;color:#051922;">Create your account</h1>
+
+            {{ form_start(formA,{'attr': {'novalidate': 'novalidate'}}) }}
+            <tr>
+
+                    <img id="imageResult" src="#" alt="Preview Profile Picture" class="img-fluid rounded shadow-sm mx-auto d-block" style="width:20vh;height:20vh;align-items:center;" >
+
+                <div style="padding-top:12px;">  </div>
+                    <tr>
+                  {{ form_row(formA.profilepicuser ,
+                        { 'attr':
+                            {
+                                'placeholder': '...',
+                                'accept':'file',
+                                'onchange':'readURL(this);',
+                            }
+                        }) }}
+
+                </tr>
+
+            </tr>
+
+            <tr>
+
+            <td>{{ form_label(formA.nameuser,"Name")}}</td>
+            <td>{{ form_errors(formA.nameuser) }}</td>
+            <td>{{ form_widget(formA.nameuser)}} </td>
+            </tr>
+
+            <tr>
+            <td> {{ form_label(formA.lastnameuser,"Last Name")}} </td>
+            <td>  {{ form_errors(formA.lastnameuser) }} </td>
+            <td> {{ form_widget(formA.lastnameuser)}}   </td>
+            </tr>
+
+            <tr>
+            <td> {{ form_label(formA.emailuser,"Email")}} </td>
+            <td> {{ form_errors(formA.emailuser) }} </td>
+            <td> {{ form_widget(formA.emailuser)}}   </td>
+            </tr>
+
+            <tr>
+            <td>  {{ form_errors(formA.plainPassword)}} </td>
+            <td>  {{ form_widget(formA.plainPassword)}}   </td>
+            </tr>
+
+            <tr>
+                <td>  {{ form_label(formA.userrole,"Register as")}} </td>
+                <td>  {{ form_errors(formA.userrole) }} </td>
+                <td> {{ form_widget(formA.userrole)}}   </td>
+            </tr>
+
+            <tr>
+                <td>  {{ form_label(formA.userstatus,"Status")}} </td>
+                <td>  {{ form_errors(formA.userstatus) }} </td>
+                <td> {{ form_widget(formA.userstatus)}}   </td>
+            </tr>
+
+                    <tr>
+                        <td>  {{ form_label(formA.agreeTerms,"Agree to our terms")}} </td>
+                        <td>  {{ form_errors(formA.agreeTerms) }} </td>
+                        <td> {{ form_widget(formA.agreeTerms)}}   </td>
+                    </tr>
+
+                    <div  class="container-login100-form-btn"  >
+                        <button  class="ghost" id="signIn "> Sign In </button> </div>
+        {{ form_end(formA) }}
+
+                </div>
+    </div>
+    </div>
+    </div>
+            <div class="splitdiv" id="rightdiv" style="height: 100%;width: 50%;top:0;overflow-x: hidden; float:right; padding-right: 20vh;padding-bottom:3vh;">
+                <div class="container" id="container"style="height: 100%;padding-top: 5vh;padding-bottom:3vh;padding-right: 20vh">
+                <div id="rightdivcard" style="margin:0 auto;width:100%;height: 100%;padding-top: 5vh;padding-bottom:3vh;padding-right: 20vh">
+                    <div class="overlay-panel overlay-right"  style="height: 100%;padding-top: 5vh;padding-bottom:3vh;padding-right: 20vh">
+                    <div class="limiter" style="height: 100%;padding-top: 5vh;padding-bottom:3vh;padding-right:5vh">
+                        <div class="container-login100" style="height: 100%;width:100vh;padding-top: 5vh;padding-bottom: 3vh;padding-right: 20vh">
+                            <div class="wrap-login100" style="height: 100%; display:flex;flex-direction: column;justify-content: center; align-items: center;">
+                    <h1 style="color:white; text-align: center;font-size: 50px;">Hello, Friend!</h1>
+                    <p style="color:white;font-size: 14px;font-weight: 100;line-height: 20px;letter-spacing: 0.5px;margin: 20px 0 30px;">Already have an account? You can access it by simply logging in.</p>
+                    <button class="login100-form-btn" id="signUp" >
+                        <a class="dropdown-item" href="{{ path('app_login') }}" style="background: transparent" >Log In</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </bodyDiv>
+    </div>
+    </div>
+
+{% endblock %}

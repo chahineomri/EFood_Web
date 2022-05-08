@@ -1,0 +1,81 @@
+{% extends 'back.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+
+    <h1>List Users</h1>
+<hr>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                            <tr>
+                                <th><span>User</span></th>
+                                <th><span>Created</span></th>
+                                <th class="text-center"><span>Status</span></th>
+                                <th><span>Email</span></th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>
+                                    <img src="uploads/profilepics/{{user.profilepicuser}}" alt="">
+                                    <a href="{{ path('app_admin_show',{'userID':user.iduser}) }}" class="user-link"> {{ user.nameuser }} {{ user.lastnameuser }} </a>
+                                    {% for role in user.userrole %}
+                                    {% if role == "ROLE_USER" %}
+                                        <span class="user-subhead"> Client </span>
+                                    {% elseif role == "ROLE_CHEF" %}
+                                        <span class="user-subhead"> Chef </span>
+                                    {% elseif role == "ROLE_DELIVERYGUY" %}
+                                        <span class="user-subhead"> Delivery Guy </span>
+                                    {% elseif role == "ROLE_ADMIN" %}
+                                        <span class="user-subhead"> Admin </span>
+                                    {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>{{ user.agreedTermsAt ? user.agreedTermsAt|date('Y-m-d') : '' }}</td>
+                                <td class="text-center">
+                                    <span class="label label-default"> {{ user.userstatus ? 'Active' : 'Blocked' }} </span>
+                                </td>
+                                <td>
+                                    <a href="mailto:{{ user.emailuser }}?subject=About your EFOOD account &cc=efoodappproject@agmail.com&body=Hi there {{ user.nameuser }} {{ user.lastnameuser }},"> {{ user.emailuser }} </a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a href="{{ path('app_admin_show',{'userID':user.iduser}) }}" class="table-link primary" >
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+
+                                    <a href="{{ path('unban',{'userID':user.iduser}) }}" class="table-link text-info">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                    <a href="{{ path('ban',{'userID':user.iduser}) }}" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-ban fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="10">no users yet</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endblock %}

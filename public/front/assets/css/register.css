@@ -1,0 +1,47 @@
+/* Split the screen in half */
+bodyDiv {
+    padding:0;
+    height: 100%;
+    width:100%;
+    font-family: Acme, serif;
+    min-width:1000px;
+
+}
+
+.splitdiv {
+    height: 50%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Control the left side */
+.leftdiv {
+    float:left;
+    background-color:#FAFAFA;
+}
+#leftdivcard{
+    margin:0 auto;
+    width:50%;
+    background-color:white;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    box-shadow: 10px 10px 1px 0px rgba(78, 205, 196, .2);
+    border-radius:10px
+}
+#leftbutton{
+    background-color:#4ECDC4;
+    border-radius:5px;
+    color:#FAFAFA;
+}
+/* Control the right side */
+
+h3{
+    font-family:Lobster;
+    color:#4ECDC4
+
+}
+
