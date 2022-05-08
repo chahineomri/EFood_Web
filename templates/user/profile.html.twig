@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <!--     Fonts and icons     -->
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Montserrat:400,700,200') }}" rel="stylesheet" />
+    <link href="{{ asset('https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="{{ asset('back/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('back/assets/css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
+
+{% endblock %}
+{% block body %}
+<div style="padding:8%;background: hsl(213deg 85% 97%);display: flex;flex-direction: column;border-radius: 30px;box-shadow: 0 0 2em hsl(231deg 62% 94%);background-color: #fff5e8;">
+    <div style ="user-select: none;overflow-y: hidden;display: flex;justify-content: center;align-items: center;background-color: #fff5e8;height: 100vh;">
+        <bodyDiv style="height:100%;width:100%;font-family: Acme, serif;min-width:700px;">
+            <div style="height:100%;width:100%;display:inline-block">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card-user">
+                                <div class="image">
+                                    <img src="uploads/profilepics/background.jpeg" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <div class="author">
+                                        <a href="#">
+                                            <img class="avatar border-gray" src="uploads/profilepics/{{app.user.profilepicuser}}" alt="...">
+                                            <h5 class="title">{{ app.user.nameuser }} {{ app.user.lastnameuser }}</h5>
+                                        </a>
+                                        <p class="description">
+                                            {{ app.user.emailuser }}
+                                        </p>
+                                    </div>
+                                    <p class="description text-center" id="showresulthere">
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <hr>
+                                    <div class="button-container">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6 col-6 ml-auto">
+                                                <h5>2 Meals <br><small>Ordered</small></h5>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-6 ml-auto">
+                                                <h5>2 Coupons<br><small>Used</small></h5>
+                                            </div>
+                                            <div class="col-lg-4 mr-auto">
+                                                <h5>24 Dinars<br><small>Spent</small></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card card-user" style="align-items:center;">
+                                <div class="card-header" >
+                                    <h5 class="card-title" ><i class="fa fa-cog" aria-hidden="true"></i> Configure your profile </h5>
+                                </div>
+                                <div class="card-body">
+
+                                                    <button class="btn btn-outline-danger"  onclick="return confirm('Are you sure you want to delete your account permanently?');"> <a href="{{ path('app_user_delete', {id: app.user.iduser}) }}" style="color: black;" > Delete Account </a>
+                                                    </button>
+                                    <button class="btn btn-outline-danger"> <a href="{{ path('app_user_edit', {id: app.user.iduser}) }}"style="color: black;" > Edit Account </a>
+                                    </button>
+                                    <button class="btn btn-outline-danger"> <a href="{{ path('app_user_passwordChange', {id: app.user.iduser}) }}"style="color: black;" > Change password </a>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+           </bodyDiv>
+            </div>
+    </div>
+{% endblock %}

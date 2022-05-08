@@ -1,0 +1,54 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+    <h2> {{ user.nameuser }} {{ user.lastnameuser }} </h2>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.iduser }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ user.nameuser }}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{ user.lastnameuser }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.emailuser }}</td>
+        </tr>
+        <tr>
+            <th>Role</th>
+            {% for role in user.userrole %}
+                {% if role == "ROLE_USER" %}
+                    <td class="user-subhead"> Client </td>
+                {% elseif role == "ROLE_CHEF" %}
+                    <td class="user-subhead"> Chef </td>
+                {% elseif role == "ROLE_DELIVERYGUY" %}
+                    <td class="user-subhead"> Delivery Guy </td>
+                {% elseif role == "ROLE_ADMIN" %}
+                    <td class="user-subhead"> Admin </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ user.userstatus ? 'Activated' : 'Blocked' }}</td>
+        </tr>
+        <tr>
+            <th>Agreed Terms At</th>
+            <td>{{ user.agreedTermsAt ? user.agreedTermsAt|date('Y-m-d') : '' }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+    <a href="{{ path('unban',{'userID':user.iduser}) }}" class="btn btn-success"> unblock </a>
+    <a href="{{ path('ban',{'userID':user.iduser}) }}" class="btn btn-danger">block </a>
+
+{% endblock %}
