@@ -1,13 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd44b61d-57aa-4a32-a4d5-6cadb2f86aaf" name="Default Changelist" comment="" />
+    <list default="true" id="bd44b61d-57aa-4a32-a4d5-6cadb2f86aaf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/img/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/abt.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/avaters/avatar1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/avaters/avatar2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/avaters/avatar3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/breadcrumb-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/company-logos/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/company-logos/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/company-logos/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/company-logos/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/company-logos/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/dd.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/feature-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/hero-bg-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/hero-bg-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/hero-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/homepage-bg-pattern.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/latest-news/news-bg-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/latest-news/news-bg-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/latest-news/news-bg-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/latest-news/news-bg-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/latest-news/news-bg-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/latest-news/news-bg-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/products/product-img-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/products/product-img-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/products/product-img-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/products/product-img-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/products/product-img-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/products/product-img-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/team/team-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/team/team-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/team/team-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/undraw_posting_photo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/undraw_profile.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/undraw_profile_1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/undraw_profile_2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/undraw_profile_3.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/undraw_rocket.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/admin-dataTable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/demo/chart-area-demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/demo/chart-bar-demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/demo/chart-pie-demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/demo/datatables-demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/form-validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery-1.11.3.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.countdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.isotope-3.0.6.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.magnific-popup.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.meanmenu.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/sb-admin-2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/sb-admin-2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/sticker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/waypoints.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vendor/datatables/dataTables.bootstrap4.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vendor/datatables/dataTables.bootstrap4.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vendor/datatables/dataTables.bootstrap4.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vendor/datatables/dataTables.bootstrap4.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vendor/datatables/jquery.dataTables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/vendor/datatables/jquery.dataTables.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/CommandeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/PanierController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/ProduitController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataFixtures/ProduitFixture.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Commande.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/CommandeInformation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Livraison.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Panier.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Produit.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/CommandeFormType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/LivraisonFormType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/PanierFormType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/CommandeInformationRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/CommandeRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/LivraisonRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/PanierRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ProduitRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/commandes.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/checkout/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/commande/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/cancel.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/payment/success.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/produit/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Efood.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Efood.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_08_04_2022_00_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_08_04_2022_00_01.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220428232736.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/back.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -153,6 +254,22 @@
       <path value="$PROJECT_DIR$/vendor/symfony/debug-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-server-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
+      <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/vendor/gedmo/doctrine-extensions" />
+      <path value="$PROJECT_DIR$/vendor/behat/transliterator" />
+      <path value="$PROJECT_DIR$/vendor/stof/doctrine-extensions-bundle" />
+      <path value="$PROJECT_DIR$/vendor/liip/imagine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfonycasts/reset-password-bundle" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/php-flasher/flasher-symfony" />
+      <path value="$PROJECT_DIR$/vendor/php-flasher/flasher-sweet-alert-symfony" />
+      <path value="$PROJECT_DIR$/vendor/php-flasher/flasher-sweet-alert" />
+      <path value="$PROJECT_DIR$/vendor/php-flasher/flasher" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/stripe/stripe-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="27UJdQW73pQhhAYd1Kx0DZSCU9E" />
@@ -165,14 +282,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/Images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/vendor" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\Efood\public\Images" />
-      <recent name="C:\xampp\htdocs\Efood\public" />
+      <recent name="C:\Users\fomri\Documents\Chahine\Web\Integration\EFood_Web\public\vendor" />
+      <recent name="C:\Users\fomri\Documents\Chahine\Web\Integration\EFood_Web\public" />
+      <recent name="C:\Users\fomri\Documents\Chahine\Web\Integration\EFood_Web\templates" />
+      <recent name="C:\Users\fomri\Documents\Chahine\Web\Integration\EFood_Web\src\Repository" />
+      <recent name="C:\Users\fomri\Documents\Chahine\Web\Integration\EFood_Web\src\DataFixtures" />
     </key>
   </component>
   <component name="RunManager">
@@ -190,6 +311,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649368817497</updated>
       <workItem from="1649368818602" duration="7456000" />
+      <workItem from="1652132396134" duration="6674000" />
     </task>
     <servers />
   </component>
@@ -206,5 +328,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

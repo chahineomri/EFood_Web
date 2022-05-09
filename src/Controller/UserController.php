@@ -50,6 +50,15 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    /**
+     * @Route("/index", name="index")
+     */
+    public function page(): Response
+    {
+        return $this->render('base.html.twig', []);
+    }
+
     /**
      * @Route("/createAccount", name="app_createAccount")
      */

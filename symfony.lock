@@ -2,6 +2,9 @@
     "behat/transliterator": {
         "version": "v1.5.0"
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -276,6 +279,9 @@
         "files": [
             "config/packages/stof_doctrine_extensions.yaml"
         ]
+    },
+    "stripe/stripe-php": {
+        "version": "v8.0.0"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.3.0"
