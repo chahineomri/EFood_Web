@@ -13,6 +13,8 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import java.io.IOException;
+
 
 /**
  * Base class for the forms with common functionality
@@ -63,7 +65,12 @@ public class BaseForm extends Form {
                         new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
         ));
         
-        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
+        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> {
+            try {
+                new ProfileForm(res).show();
+            } catch (IOException ex) {
+            }
+        });
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new BaseForm().show());
     }
 }

@@ -52,10 +52,10 @@ public class UserService {
     }
     
     //Signup
-    public void signup(TextField name,TextField lastname,TextField email,TextField password,TextField confirmPassword, Resources res ) {
+    public void signup(TextField name,TextField lastname,TextField email,TextField password,TextField confirmPassword, String image,Resources res ) {
 
         String url = statics.BASE_URL+"/user/mobile/signup?name="+name.getText().toString()+"&lastname="+lastname.getText().toString()+
-                "&email="+email.getText().toString()+"&password="+password.getText().toString();
+                "&email="+email.getText().toString()+"&password="+password.getText().toString()+"&image="+image;
         
         req.setUrl(url);
         
@@ -222,5 +222,14 @@ else{
         NetworkManager.getInstance().addToQueueAndWait(req);
    
                 }
+        public void UpdateProfilePic(String email, String profilepic) {
+        String url = statics.BASE_URL + "/user/mobile/updateProfilePic?email="+email+"&profilepic="+profilepic ;
+        System.out.print(url);
+        ConnectionRequest req = new ConnectionRequest();
+        req.setUrl(url);
+        NetworkManager.getInstance().addToQueueAndWait(req);
+
+    }
+         
      
 }

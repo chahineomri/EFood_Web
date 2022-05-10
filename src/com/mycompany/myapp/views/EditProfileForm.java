@@ -9,6 +9,8 @@ package com.mycompany.myapp.views;
  * @author sarawahada
  */
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.MultiButton;
+import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
 import com.codename1.sms.ActivationForm;
 import com.codename1.sms.TwilioSMS;
@@ -39,7 +41,9 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.UserService;
+import java.io.IOException;
 import java.util.Properties;
+
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
@@ -55,17 +59,25 @@ import javax.mail.internet.MimeMultipart;
 
 public class EditProfileForm extends SideMenuBaseForm {
        String accountSID = "ACed511353381614dcc72e1c248160e5e6";
-String authToken = "da30048051a082731b641544ad707042";
-String fromPhone = "+19705288371";
-    public EditProfileForm(Resources res) {
-         super(BoxLayout.y());
+       String authToken = "da30048051a082731b641544ad707042";
+       String fromPhone = "+19705288371";
+        Form F;
+        
+     String a;
+       public EditProfileForm(Resources res) throws IOException {
+           super(BoxLayout.y());
+           
+            F = createEditForm(res);
+            
+       }
+       
+     public Form createEditForm(Resources res) throws IOException {
+             
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
         Form hi = new Form("Toolbar", new BoxLayout(BoxLayout.Y_AXIS));
-        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(hi.getWidth(), hi.getWidth() / 5, 0xffff0000), true);
-         URLImage profile = URLImage.createToStorage(placeholder, "400px-AGameOfThrones.jpg",
-        "http://awoiaf.westeros.org/images/thumb/9/93/AGameOfThrones.jpg/400px-AGameOfThrones.jpg");
-        profile.fetch();
+         Image profile = Image.createImage(FileSystemStorage.getInstance().openInputStream(SessionManager.getProfilePicUser()));
+
        Style stitle = hi.getToolbar().getTitleComponent().getUnselectedStyle();
        stitle.setBgImage(profile);
         //Image profilePic = res.getImage("SessionManager");
@@ -80,6 +92,7 @@ String fromPhone = "+19705288371";
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
         
        
+       
 
         Container titleCmp = BoxLayout.encloseY(
                         FlowLayout.encloseIn(menuButton),
@@ -91,14 +104,14 @@ String fromPhone = "+19705288371";
                             ).add(BorderLayout.WEST, profilePicLabel)
                         
                 );
-              System.out.print(SessionManager.getUserStatus());
+             // System.out.print(SessionManager.getUserStatus());
         if("true".equals(SessionManager.getUserStatus())) {
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_LOCK);
         fab.getAllStyles().setPaddingUnit(Style.UNIT_TYPE_PIXELS);
         fab.getAllStyles().setPaddingTop(10);
         fab.setVisible(false);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
-        
+
         }
         else{
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_LOCK);
@@ -115,16 +128,15 @@ String fromPhone = "+19705288371";
         refreshTheme();
         fab.setVisible(false);
         UserService.getInstance().verify(SessionManager.getEmailUser());
+        SessionManager.setUserStatus("true");
+
         });
       
             
         }       
         add(new Label("Edit Account", "TodayTitle"));
         
-    
-       
-        
-        Form previous = Display.getInstance().getCurrent();
+  
 
         TextField name = new TextField("", "Name", 20, TextField.ANY);
        
@@ -155,32 +167,32 @@ String fromPhone = "+19705288371";
          add(lastname);
          add(passwordLabel);
          add(password);
-        Button img = new Button("Select a profile picture");
-
+       
         Button next = new Button("Update");
         next.setUIID("LoginButton");
+        next.setVisible(true);
         add(next);
-        
         next.addActionListener((ActionEvent e) -> {
         if(name.getText().equals("")){
          refreshTheme();
+         passwordLabel.setVisible(false);
          nameLabel.setVisible(true);
          lastnameLabel.setVisible(false);
-          passwordLabel.setVisible(false);
         }
         else if(lastname.getText().equals("")){
          refreshTheme();
-         lastnameLabel.setVisible(true);
-         nameLabel.setVisible(false);
          passwordLabel.setVisible(false);
+         nameLabel.setVisible(false);
+         lastnameLabel.setVisible(true);
         }
-         else if(password.getText().equals("")){
+     
+        else if(password.getText().equals("")){
          refreshTheme();
          passwordLabel.setVisible(true);
          nameLabel.setVisible(false);
          lastnameLabel.setVisible(false);
         }
-    
+                
 
          else {
             UserService.getInstance().update(name.getText(),lastname.getText(),email.getText(),password.getText());
@@ -189,8 +201,10 @@ String fromPhone = "+19705288371";
             System.out.print("user updated");
             
         }
+                
 
-        });
+        }); 
+      
 
         // We remove the extra space for low resolution devices so things fit better
          Label spaceLabel;
@@ -201,12 +215,17 @@ String fromPhone = "+19705288371";
         }
 
          setupSideMenu(res);
+           return null;
+     }
+     @Override
+    protected void showOtherForm(Resources res) {
+           try {
+               createEditForm(res);
+           } catch (IOException ex) {
+           }
+
     }
 
-    @Override
-    protected void showOtherForm(Resources res) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     public void sendMailUpdated(String address) {
 
        //authentification info

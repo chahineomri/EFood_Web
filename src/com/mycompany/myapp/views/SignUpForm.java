@@ -5,6 +5,9 @@ package com.mycompany.myapp.views;
 
 
 
+import com.codename1.capture.Capture;
+import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Log;
 import com.codename1.ui.Button;
 
 import static com.codename1.ui.Component.LEFT;
@@ -12,19 +15,29 @@ import static com.codename1.ui.Component.LEFT;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 
 import com.codename1.ui.Form;
+import com.codename1.ui.Graphics;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.ImageIO;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.UserService;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
+
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
@@ -38,15 +51,16 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class SignUpForm extends BaseForm {
-
-    public SignUpForm(Resources res) {
+     String pathToBeStored ="file://home/1652073425984.jpg";
+       public SignUpForm(Resources res) {
        super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
         Container welcome = FlowLayout.encloseCenter(
                 new Label("Create Account ", "WelcomeWhite")
         );
         Form previous = Display.getInstance().getCurrent();
-
+        Toolbar.setGlobalToolbar(true);
+        Label picture = new Label("", "ProfilePic");
         TextField name = new TextField("", "Name", 20, TextField.ANY);
         TextField lastname = new TextField("", "Last Name", 20, TextField.ANY);
         TextField email = new TextField("", "Email", 20, TextField.EMAILADDR);
@@ -68,9 +82,13 @@ public class SignUpForm extends BaseForm {
         lastnameLabel.setVisible(false);
         Label emailLabel= new Label("Enter a correct email","ControlLabel");
         emailLabel.setVisible(false);
-        Button img = new Button("Select a profile picture");
-
         Button next = new Button("Next");
+        Button signIn = new Button("Login?");
+        signIn.addActionListener(e -> previous.showBack());
+        Button capture = new Button("");
+        capture.setUIID("LoginButton");
+        FontImage.setMaterialIcon(capture, FontImage.MATERIAL_ADD_A_PHOTO, 6);
+        next.setUIID("LoginButton");
         next.addActionListener((ActionEvent e) -> {
          User u = UserService.getInstance().getUser(email.getText());
         if(name.getText().equals("")){
@@ -121,28 +139,23 @@ public class SignUpForm extends BaseForm {
          nameLabel.setVisible(false);
  
         }
-         
-       
-        else{
-        
-
-            UserService.getInstance().signup(name,lastname,email,password,confirmPassword,res);
-            sendMailCreated(email.getText());
-            Dialog.show("Success", "Account created!", "ok",null);
-            System.out.print("user created");
-            previous.showBack();
+        else {
             
-    
+       
+               UserService.getInstance().signup(name,lastname,email,password,confirmPassword,pathToBeStored,res);
+               sendMailCreated(email.getText());
+               Dialog.show("Success", "Account created!", "ok",null);
+               System.out.print("user created");
+               previous.showBack();
+               
+           
+           
         }
       
         
         });
-
-     
-        Button signIn = new Button("Login?");
-        signIn.addActionListener(e -> previous.showBack());
-        signIn.setUIID("Link");
-        next.setUIID("LoginButton");
+      
+       
       
         
         // We remove the extra space for low resolution devices so things fit better
@@ -155,6 +168,8 @@ public class SignUpForm extends BaseForm {
         Container container = BoxLayout.encloseY(
                 welcome,
                 spaceLabel,
+                picture,
+                capture,
                 nameLabel,
                 BorderLayout.center(name),
                 lastnameLabel,       
@@ -167,13 +182,15 @@ public class SignUpForm extends BaseForm {
                 BorderLayout.center(confirmPassword),
                 next,
                 signIn
-                
+
         );
         container.setScrollableY(true);
         add(BorderLayout.CENTER, container);
         container.setScrollableY(true);
         container.setScrollVisible(false);
     }
+
+ 
         public void sendMailCreated(String address) {
 
        //authentification info
