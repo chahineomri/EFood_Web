@@ -45,6 +45,13 @@
                         <p>Our Coupouns</p>
                     </a>
                 </li>
+                <li class="active ">
+                    <a href="{{ path('calendar_index') }}">
+                        <i class="nc-icon nc-bank"></i>
+                        <p>Calendar</p>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
@@ -126,6 +133,7 @@
                                 <td>{{ offre.dateOffre ? offre.dateOffre|date('Y-m-d') : '' }}</td>
                                 <td>{{ offre.typeOffre }}</td>
                                 <td>{{ offre.imgOffre }}</td>
+
                                 <td>
                                     <a href="{{ path('app_offre_show', {'idOffre': offre.idOffre}) }}">show</a>
                                     <a href="{{ path('app_offre_edit', {'idOffre': offre.idOffre}) }}">edit</a>

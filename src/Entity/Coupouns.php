@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Coupouns
  *
@@ -18,6 +19,7 @@ class Coupouns
      * @ORM\Column(name="id_coupouns", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idCoupouns;
 
@@ -49,6 +51,7 @@ class Coupouns
      *      maxMessage = "doit etre <=15" )
      *
      * @ORM\Column(name="text_coupouns", type="string", length=200, nullable=false)
+     *  @Groups("post:read")
      */
     private $textCoupouns;
 
@@ -62,6 +65,7 @@ class Coupouns
      *      maxMessage = "doit etre <=15" )
      *
      * @ORM\Column(name="code_coupouns", type="string", length=200, nullable=false)
+     *  @Groups("post:read")
      */
     private $codeCoupouns;
 
@@ -70,6 +74,7 @@ class Coupouns
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="date_1", type="date", nullable=false)
+     *  @Groups("post:read")
      */
     private $date1;
 
@@ -78,6 +83,7 @@ class Coupouns
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="date_2", type="date", nullable=false)
+     *  @Groups("post:read")
      */
     private $date2;
 
@@ -86,6 +92,7 @@ class Coupouns
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="id_promo1", type="integer", nullable=false)
+     *  @Groups("post:read")
      */
     private $idPromo1;
 
@@ -93,6 +100,7 @@ class Coupouns
      * @var int
      * @Assert\NotBlank(message="description  doit etre non vide")
      * @ORM\Column(name="duree_coupouns", type="integer", nullable=false)
+     *  @Groups("post:read")
      */
     private $dureeCoupouns;
 

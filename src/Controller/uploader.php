@@ -3,11 +3,10 @@
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Sluggable\Util\Urlizer;
-
 class uploader
 {
     const PROFILE_IMAGE = 'imgOffre';
-    public function uploadProfilePic(UploadedFile $uploadedFile):string
+    public function uploadOfferPic(UploadedFile $uploadedFile):string
     {
         $destination = $this->uploadsPath.'/'.self::PROFILE_IMAGE;
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -25,5 +24,4 @@ class uploader
     {
         $this->uploadsPath = $uploadsPath;
     }
-
 }

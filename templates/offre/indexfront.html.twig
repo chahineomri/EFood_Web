@@ -120,40 +120,9 @@
 <div class="list-section pt-80 pb-80">
     <div class="container">
 
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <div class="list-box d-flex align-items-center">
-                    <div class="list-icon">
-                        <i class="fas fa-shipping-fast"></i>
-                    </div>
-                    <div class="content">
-                        <h3>Free Shipping</h3>
-                        <p>When order over $75</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <div class="list-box d-flex align-items-center">
-                    <div class="list-icon">
-                        <i class="fas fa-phone-volume"></i>
-                    </div>
-                    <div class="content">
-                        <h3>24/7 Support</h3>
-                        <p>Get support all day</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="list-box d-flex justify-content-start align-items-center">
-                    <div class="list-icon">
-                        <i class="fas fa-sync"></i>
-                    </div>
-                    <div class="content">
-                        <h3>Refund</h3>
-                        <p>Get refund within 3 days!</p>
-                    </div>
-                </div>
-            </div>
+
+
+
         </div>
 
     </div>
@@ -175,36 +144,26 @@
 
 
         <table class="table">
-            <thead>
-            <tr>
-                <th>Offer ID:</th>
-                <th> Offer Name:</th>
-                <th>Offer Date:</th>
-                <th>Offer Type:</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-            </thead>
+>
             <tbody>
+            <div class="row">
             {% for offre in offres %}
-                <tr>
-                    <td>{{ offre.idOffre }}</td>
-                    <td>{{ offre.textOffre }}</td>
-                    <td>{{ offre.dateOffre ? offre.dateOffre|date('Y-m-d') : '' }}</td>
-                    <td>{{ offre.typeOffre }}</td>
-                    <td>{{ offre.imgOffre }}</td>
-                    <td>
-                        <a href="{{ path('app_offre_show', {'idOffre': offre.idOffre}) }}">show</a>
-
-                    </td>
-                </tr>
 
 
-            {% else %}
-                <tr>
-                    <td colspan="6">no records found</td>
-                </tr>
-            {% endfor %}
+                    <div class="col-lg-4 col-md-6 text-center">
+                        <div class="single-product-item">
+                            <div class="product-image">
+                                <a href="#">
+                                   <img src="{{ asset('uploads/imgOffre/..') }}" alt=""></a>
+                            </div>
+                            <h3>{{ offre.textOffre }}</h3>
+                            <p class="product-price"> {{ offre.dateOffre ? offre.dateOffre|date('Y-m-d') : '' }} </p>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+
 
             </tbody>
         </table>

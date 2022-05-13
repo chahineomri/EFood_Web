@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Promo
  *
@@ -19,6 +19,7 @@ class Promo
      * @ORM\Column(name="id_promo", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *  @Groups("post:read")
      */
     private $idPromo;
 
@@ -32,6 +33,8 @@ class Promo
      *      maxMessage = "doit etre <=15" )
      *
      * @ORM\Column(name="nom_promo", type="string", length=50, nullable=false)
+     *  @Groups("post:read")
+     *
      */
     private $nomPromo;
 
@@ -40,6 +43,7 @@ class Promo
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="type_promo", type="integer", nullable=false)
+     *  @Groups("post:read")
      */
     private $typePromo;
 
@@ -48,6 +52,7 @@ class Promo
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="date_D", type="date", nullable=false)
+     *  @Groups("post:read")
      */
     private $dateD;
 
@@ -56,6 +61,7 @@ class Promo
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="date_F", type="date", nullable=false)
+     *  @Groups("post:read")
      */
     private $dateF;
 
@@ -69,6 +75,7 @@ class Promo
      *      maxMessage = "doit etre <=15" )
      *
      * @ORM\Column(name="id_resto", type="integer", nullable=false)
+     *  @Groups("post:read")
      */
     private $idResto;
 
@@ -82,6 +89,7 @@ class Promo
      *      maxMessage = "doit etre <=15" )
      *
      * @ORM\Column(name="text_promo", type="string", length=100, nullable=false)
+     *  @Groups("post:read")
      */
     private $textPromo;
 

@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Offre
  *
@@ -23,12 +24,14 @@ class Offre
      * @ORM\Column(name="id_offre", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *  @Groups("post:read")
      */
     private $idOffre;
 
     /**
      * @var string
      * @Assert\NotBlank(message="description  doit etre non vide")
+     *  @Groups("post:read")
      * @Assert\Length(
      *      min = 7,
      *      max = 100,
@@ -41,6 +44,7 @@ class Offre
 
     /**
      * @var \DateTime
+     * @Groups("post:read")
      * @Assert\NotBlank(message="description  doit etre non vide")
      *
      * @ORM\Column(name="date_offre", type="date", nullable=false)
@@ -50,6 +54,7 @@ class Offre
     /**
      * @var string
      * @Assert\NotBlank(message="description  doit etre non vide")
+     * @Groups("post:read")
      * @Assert\Length(
      *      min = 7,
      *      max = 100,
@@ -63,6 +68,7 @@ class Offre
     /**
      * @var string
      * @Assert\NotBlank(message="description  doit etre non vide")
+     * @Groups("post:read")
      * @Assert\Length(
      *      min = 7,
      *      max = 100,
@@ -73,11 +79,7 @@ class Offre
      * @ORM\Column(name="img_offre", type="string", length=100, nullable=false)
      */
     private $imgOffre;
-    /**
-     * @Vich\UploadableField(mapping="offre_images", fileNameProperty="imgOffre")
-     * @var File
-     */
-    private $imageFile;
+
 
     /**
      * @return int
@@ -168,24 +170,26 @@ class Offre
         $this->imgOffre = $imgOffre;
         return $this;
     }
-    /**
-     * @return File|null
-     */
-    public function getImageFilename(): ?File
+
+    public function getImageFilename(): ?string
     {
-        return $this->imageFile;
+        return $this->imgOffre;
     }
-    /**
-     * @return File|null $imageFile
-     */
-    public function setImageFilename(File $imgOffre = null): ?File
+    public function setImageFilename(?string $imageFilename): self
     {
-        $this->imageFile = $imgOffre;
+        $this->imgOffre = $imageFilename;
         return $this;
     }
     public function getImagePath()
     {
         return uploader::PROFILE_IMAGE.'/'.$this->getImageFilename();
     }
+
+    public function __call(string $name, array $arguments)
+    {
+        // TODO: Implement __call() method.
+    }
+
+
 
 }

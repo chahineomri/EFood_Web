@@ -43,6 +43,13 @@
                             <p>Our Coupouns</p>
                         </a>
                     </li>
+                    <li class="active ">
+                        <a href="{{ path('calendar_index') }}">
+                            <i class="nc-icon nc-bank"></i>
+                            <p>Calendar</p>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -100,6 +107,9 @@
                     <div class="col-md-12">
                         <h3 class="description">    OUR OFFERS</h3>
                         {{ include('offre/_form.html.twig') }}
+                        <img id="imageResult" src="#" alt="the offer picture" class="img-fluid rounded shadow-sm mx-auto d-block" style="width:20vh;height:20vh;align-items:center;" >
+
+
 
                         <a href="{{ path('app_offre_index') }}">back to list</a>
 

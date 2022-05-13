@@ -7,17 +7,7 @@
 </head>
 
 {% block body %}
-    <header class="clearfix">
 
-        <div id="company">
-            <font color="orange">
-            <h2 class="name">E-FOOD</h2></font>
-            <div>455 Foggy Heights, AZ 85004, US</div>
-            <div>(602) 519-0450</div>
-            <div><a href="EFOOD@example.com">E-Food@gmail.com</a></div>
-        </div>
-        </div>
-    </header>
 <!-- End Navbar -->
 <style>
     body {
@@ -50,12 +40,12 @@
 <body>
 <div class="coupon">
     <div class="container">
-        <h3>Company Logo</h3>
+        <h3>E-food Application</h3>
     </div>
-    <img src="/w3images/hamburger.jpg" alt="Avatar" style="width:100%;">
+
     <div class="container" style="background-color:white">
 <font color="orange">
-<h1>The Coupoun</h1>
+<h1>Enjoy Coupoun</h1>
 </font>
     </div>
     <div class="container">
@@ -63,11 +53,11 @@
             <tbody>
 
             <tr>
-                <font color="#adff2f"><th>Coupouns Name:</th> </font>
+                <font color="#adff2f"><th>Coupoun Name:</th> </font>
                 <td>{{ coupoun.textCoupouns }}</td>
             </tr>
             <tr>
-                <font color="#adff2f"><th>Coupouns code : </th> </font>
+                <font color="#adff2f"><th>Coupoun code : </th> </font>
                 <td>{{ coupoun.textCoupouns }}</td>
             </tr>
             <tr>
@@ -75,14 +65,11 @@
                 <td>{{ coupoun.date1 ? coupoun.date1|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <font color="#adff2f"> <th>Finishing Date</th> </font>
+                <font color="#adff2f"> <th>Expiration Date :</th> </font>
                 <td>{{ coupoun.date2 ? coupoun.date2|date('Y-m-d') : ''  }}</td>
             </tr>
 
-            <tr>
-                <font color="#adff2f"> <th>Coupoun Duration</th> </font>
-                <td>{{ coupoun.dureeCoupouns }}</td>
-            </tr>
+
 
             </tbody>
         </table>
