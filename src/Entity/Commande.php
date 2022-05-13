@@ -2,159 +2,102 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CommandeRepository::class)
+ * Commande
+ *
+ * @ORM\Table(name="commande")
+ * @ORM\Entity
  */
 class Commande
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_commande", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
-
-
+    private $idCommande;
 
     /**
-     * @ORM\OneToOne(targetEntity=Livraison::class, mappedBy="commande", cascade={"persist", "remove"})
+     * @var int
+     *
+     * @ORM\Column(name="id_client", type="integer", nullable=false)
      */
-    private $livraison;
-
+    private $idClient;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false,referencedColumnName="IdUser")
+     * @var string
+     *
+     * @ORM\Column(name="nom_client", type="string", length=256, nullable=false)
      */
-    private $user;
+    private $nomClient;
 
-    public function __construct()
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="plat_cmd", type="string", length=256, nullable=false)
+     */
+    private $platCmd;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieu_cmd", type="string", length=256, nullable=false)
+     */
+    private $lieuCmd;
+
+    public function getIdCommande(): ?int
     {
-        $this->commandeInformations = new ArrayCollection();
+        return $this->idCommande;
     }
 
-    public function getId(): ?int
+    public function getIdClient(): ?int
     {
-        return $this->id;
+        return $this->idClient;
     }
 
-    /**
-     * @ORM\OneToMany(targetEntity=CommandeInformation::class, mappedBy="commande",fetch="EAGER")
-     */
-    private $commandeInformations;
-
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $etat;
-
-    /**
-     * @return mixed
-     */
-    public function getEtat()
+    public function setIdClient(int $idClient): self
     {
-        return $this->etat;
-    }
-
-    /**
-     * @param mixed $etat
-     */
-    public function setEtat($etat): void
-    {
-        $this->etat = $etat;
-    }
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $totale;
-
-    /**
-     * @return mixed
-     */
-    public function getTotale()
-    {
-        return $this->totale;
-    }
-
-    /**
-     * @param mixed $totale
-     */
-    public function setTotale($totale): void
-    {
-        $this->totale = $totale;
-    }
-
-
-    public function getLivraison(): ?Livraison
-    {
-        return $this->livraison;
-    }
-
-    public function setLivraison(Livraison $livraison): self
-    {
-        // set the owning side of the relation if necessary
-        if ($livraison->getCommande() !== $this) {
-            $livraison->setCommande($this);
-        }
-
-        $this->livraison = $livraison;
+        $this->idClient = $idClient;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getNomClient(): ?string
     {
-        return $this->user;
+        return $this->nomClient;
     }
 
-    public function setUser(?User $user): self
+    public function setNomClient(string $nomClient): self
     {
-        $this->user = $user;
+        $this->nomClient = $nomClient;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCommandeInformations()
+    public function getPlatCmd(): ?string
     {
-        return $this->commandeInformations;
+        return $this->platCmd;
     }
 
-    /**
-     * @param mixed $commandeInformations
-     */
-    public function setCommandeInformations($commandeInformations): void
+    public function setPlatCmd(string $platCmd): self
     {
-        $this->commandeInformations = $commandeInformations;
-    }
-
-    public function addCommandeInformation(CommandeInformation $commandeInformation): self
-    {
-        if (!$this->commandeInformations->contains($commandeInformation)) {
-            $this->commandeInformations[] = $commandeInformation;
-            $commandeInformation->setCommande($this);
-        }
+        $this->platCmd = $platCmd;
 
         return $this;
     }
 
-    public function removeCommandeInformation(CommandeInformation $commandeInformation): self
+    public function getLieuCmd(): ?string
     {
-        if ($this->commandeInformations->removeElement($commandeInformation)) {
-            // set the owning side to null (unless already changed)
-            if ($commandeInformation->getCommande() === $this) {
-                $commandeInformation->setCommande(null);
-            }
-        }
+        return $this->lieuCmd;
+    }
+
+    public function setLieuCmd(string $lieuCmd): self
+    {
+        $this->lieuCmd = $lieuCmd;
 
         return $this;
     }
