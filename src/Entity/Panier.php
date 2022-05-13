@@ -2,77 +2,105 @@
 
 namespace App\Entity;
 
-use App\Repository\PanierRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PanierRepository::class)
+ * Panier
+ *
+ * @ORM\Table(name="panier")
+ * @ORM\Entity
  */
 class Panier
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_panier", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idPanier;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var int
+     *
+     * @ORM\Column(name="id_commande", type="integer", nullable=false)
      */
-    private $dateCreation;
-
-
+    private $idCommande;
 
     /**
-     * @ORM\Column(type="float")
+     * @var int
+     *
+     * @ORM\Column(name="prix", type="integer", nullable=false)
      */
-    private $totale;
+    private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false,referencedColumnName="IdUser")
+     * @var int
+     *
+     * @ORM\Column(name="qte", type="integer", nullable=false)
      */
-    private $user;
+    private $qte;
 
-    public function getId(): ?int
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total", type="integer", nullable=false)
+     */
+    private $total;
+
+    public function getIdPanier(): ?int
     {
-        return $this->id;
+        return $this->idPanier;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getIdCommande(): ?int
     {
-        return $this->dateCreation;
+        return $this->idCommande;
     }
 
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    public function setIdCommande(int $idCommande): self
     {
-        $this->dateCreation = $dateCreation;
+        $this->idCommande = $idCommande;
 
         return $this;
     }
 
-    public function getTotale(): ?float
+    public function getPrix(): ?int
     {
-        return $this->totale;
+        return $this->prix;
     }
 
-    public function setTotale(float $totale): self
+    public function setPrix(int $prix): self
     {
-        $this->totale = $totale;
+        $this->prix = $prix;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getQte(): ?int
     {
-        return $this->user;
+        return $this->qte;
     }
 
-    public function setUser(?User $user): self
+    public function setQte(int $qte): self
     {
-        $this->user = $user;
+        $this->qte = $qte;
 
         return $this;
     }
+
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(int $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+
 }

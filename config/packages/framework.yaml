@@ -15,7 +15,3 @@ framework:
     #fragments: true
     php_errors:
         log: true
-    assets:
-        packages:
-            apps:
-                json_manifest_path: '%kernel.project_dir%/var/assets/apps-manifest.json'
