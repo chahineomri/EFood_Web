@@ -2,45 +2,53 @@
 
 namespace App\Entity;
 
+use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Produit
- *
- * @ORM\Table(name="produit")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
 class Produit
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommandeInformation::class, mappedBy="produit")
+     */
+    private $commandeInformations;
+
+    public function __construct()
+    {
+        $this->commandeInformations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -83,5 +91,54 @@ class Produit
         return $this;
     }
 
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommandeInformations()
+    {
+        return $this->commandeInformations;
+    }
+
+    /**
+     * @param mixed $commandeInformations
+     */
+    public function setCommandeInformations($commandeInformations): void
+    {
+        $this->commandeInformations = $commandeInformations;
+    }
+
+    public function addCommandeInformation(CommandeInformation $commandeInformation): self
+    {
+        if (!$this->commandeInformations->contains($commandeInformation)) {
+            $this->commandeInformations[] = $commandeInformation;
+            $commandeInformation->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeInformation(CommandeInformation $commandeInformation): self
+    {
+        if ($this->commandeInformations->removeElement($commandeInformation)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeInformation->getProduit() === $this) {
+                $commandeInformation->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

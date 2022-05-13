@@ -1,15 +1,39 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
+    hide_user_not_found: false
     providers:
-        users_in_memory: { memory: null }
+            app_user_provider:
+                entity:
+                    class: App\Entity\User
+                    property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
-            provider: users_in_memory
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Controller\LoginFormAuthenticator
 
+            logout:
+                path: app_logout
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 2592000 # 30 days in seconds
+
+            user_checker: App\Controller\LoginFormAuthenticator
+
+
+    encoders:
+    # use your user class name here
+        App\Entity\User:
+        # Use native password encoder
+        # This value auto-selects the best possible hashing algorithm
+        # (i.e. Sodium when available).
+            algorithm: auto
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -19,5 +43,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+         # require the user to fully login to change password
+        - { path: ^/change-password, roles: IS_AUTHENTICATED_FULLY }

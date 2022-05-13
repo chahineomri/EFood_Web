@@ -2,89 +2,159 @@
 
 namespace App\Entity;
 
+use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Commande
- *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="id_produit", columns={"id_produit"}), @ORM\Index(name="fk_user", columns={"id_user"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CommandeRepository::class)
  */
 class Commande
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Quantity", type="integer", nullable=false)
-     */
-    private $quantity;
+
 
     /**
-     * @var \Produit
-     *
-     * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity=Livraison::class, mappedBy="commande", cascade={"persist", "remove"})
      */
-    private $idProduit;
+    private $livraison;
+
 
     /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false,referencedColumnName="IdUser")
      */
-    private $idUser;
+    private $user;
+
+    public function __construct()
+    {
+        $this->commandeInformations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getQuantity(): ?int
+    /**
+     * @ORM\OneToMany(targetEntity=CommandeInformation::class, mappedBy="commande",fetch="EAGER")
+     */
+    private $commandeInformations;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $etat;
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
     {
-        return $this->quantity;
+        return $this->etat;
     }
 
-    public function setQuantity(int $quantity): self
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
     {
-        $this->quantity = $quantity;
+        $this->etat = $etat;
+    }
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $totale;
+
+    /**
+     * @return mixed
+     */
+    public function getTotale()
+    {
+        return $this->totale;
+    }
+
+    /**
+     * @param mixed $totale
+     */
+    public function setTotale($totale): void
+    {
+        $this->totale = $totale;
+    }
+
+
+    public function getLivraison(): ?Livraison
+    {
+        return $this->livraison;
+    }
+
+    public function setLivraison(Livraison $livraison): self
+    {
+        // set the owning side of the relation if necessary
+        if ($livraison->getCommande() !== $this) {
+            $livraison->setCommande($this);
+        }
+
+        $this->livraison = $livraison;
 
         return $this;
     }
 
-    public function getIdProduit(): ?Produit
+    public function getUser(): ?User
     {
-        return $this->idProduit;
+        return $this->user;
     }
 
-    public function setIdProduit(?Produit $idProduit): self
+    public function setUser(?User $user): self
     {
-        $this->idProduit = $idProduit;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getIdUser(): ?User
+    /**
+     * @return mixed
+     */
+    public function getCommandeInformations()
     {
-        return $this->idUser;
+        return $this->commandeInformations;
     }
 
-    public function setIdUser(?User $idUser): self
+    /**
+     * @param mixed $commandeInformations
+     */
+    public function setCommandeInformations($commandeInformations): void
     {
-        $this->idUser = $idUser;
+        $this->commandeInformations = $commandeInformations;
+    }
+
+    public function addCommandeInformation(CommandeInformation $commandeInformation): self
+    {
+        if (!$this->commandeInformations->contains($commandeInformation)) {
+            $this->commandeInformations[] = $commandeInformation;
+            $commandeInformation->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeInformation(CommandeInformation $commandeInformation): self
+    {
+        if ($this->commandeInformations->removeElement($commandeInformation)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeInformation->getCommande() === $this) {
+                $commandeInformation->setCommande(null);
+            }
+        }
 
         return $this;
     }

@@ -2,108 +2,77 @@
 
 namespace App\Entity;
 
+use App\Repository\PanierRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Panier
- *
- * @ORM\Table(name="panier", indexes={@ORM\Index(name="FK_userkey", columns={"id_user"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=PanierRepository::class)
  */
 class Panier
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="total", type="bigint", nullable=false)
+     * @ORM\Column(type="datetime")
      */
-    private $total;
+    private $dateCreation;
+
+
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="datePanier", type="date", nullable=true, options={"default"="current_timestamp()"})
+     * @ORM\Column(type="float")
      */
-    private $datepanier = 'current_timestamp()';
+    private $totale;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="text", length=65535, nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false,referencedColumnName="IdUser")
      */
-    private $etat;
-
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     * })
-     */
-    private $idUser;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTotal(): ?string
+    public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->total;
+        return $this->dateCreation;
     }
 
-    public function setTotal(string $total): self
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
-        $this->total = $total;
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
-    public function getDatepanier(): ?\DateTimeInterface
+    public function getTotale(): ?float
     {
-        return $this->datepanier;
+        return $this->totale;
     }
 
-    public function setDatepanier(?\DateTimeInterface $datepanier): self
+    public function setTotale(float $totale): self
     {
-        $this->datepanier = $datepanier;
+        $this->totale = $totale;
 
         return $this;
     }
 
-    public function getEtat(): ?string
+    public function getUser(): ?User
     {
-        return $this->etat;
+        return $this->user;
     }
 
-    public function setEtat(string $etat): self
+    public function setUser(?User $user): self
     {
-        $this->etat = $etat;
+        $this->user = $user;
 
         return $this;
     }
-
-    public function getIdUser(): ?User
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(?User $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-
 }
