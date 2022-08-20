@@ -33,7 +33,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="f{{ asset('front/assets/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/fonts/iconic/css/material-design-iconic-font.min.css') }}">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="{{ asset('front/assets/vendor/animate/animate.css') }}">
         <!--===============================================================================================-->
@@ -54,6 +54,21 @@
 
 
     {% block javascripts %}
+
+        <script src="{{ asset('back/assets/js/core/jquery.min.js') }}"></script>
+        <script src="{{ asset('back/assets/js/core/popper.min.js') }}"></script>
+        <script src="{{ asset('back/assets/js/core/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('back/assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+        <!--  Google Maps Plugin    -->
+        <script src="{{ asset('https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE') }}"></script>
+        <!-- Chart JS -->
+        <script src="{{ asset('back/assets/js/plugins/chartjs.min.js') }}"></script>
+        <!--  Notifications Plugin    -->
+        <script src="{{ asset('back/assets/js/plugins/bootstrap-notify.js') }}"></script>
+        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="{{ asset('back/assets/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
+        <script src="{{ asset('app.js') }}"></script>
+
         <script>
             /*  ==========================================
                 SHOW UPLOADED IMAGE
@@ -74,21 +89,8 @@
                     readURL(input);
 
                 });
-           });
+            });
         </script>
-        <script src="{{ asset('back/assets/js/core/jquery.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/core/popper.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/core/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
-        <!--  Google Maps Plugin    -->
-        <script src="{{ asset('https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE') }}"></script>
-        <!-- Chart JS -->
-        <script src="{{ asset('back/assets/js/plugins/chartjs.min.js') }}"></script>
-        <!--  Notifications Plugin    -->
-        <script src="{{ asset('back/assets/js/plugins/bootstrap-notify.js') }}"></script>
-        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="{{ asset('back/assets/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
-        <script src="{{ asset('app.js') }}"></script>
 
     {% endblock %}
 

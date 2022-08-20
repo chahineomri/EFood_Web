@@ -31,17 +31,19 @@ class AdminController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
+
     /**
      * @Route("/admin/ban/{userID}",
      * defaults={"userID" = 0},
      * name="ban")
      */
-    public function banUserAction(SweetAlertFactory $flasher,MailerInterface $mailer,$userID){
+    public function banUserAction(SweetAlertFactory $flasher, MailerInterface $mailer, $userID)
+    {
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
         $user->setUserstatus(0);
         $em = $this->getDoctrine()->getManager();
-        $em->persist( $user );
+        $em->persist($user);
         $em->flush();
         $flasher->addSuccess('User banned successfully!');
         $email = (new TemplatedEmail())
@@ -52,17 +54,19 @@ class AdminController extends AbstractController
         $mailer->send($email);
         return $this->redirectToRoute('app_admin');
     }
+
     /**
      * @Route("/admin/unban/{userID}",
      * defaults={"userID" = 0},
      * name="unban")
      */
-    public function unbanUserAction(SweetAlertFactory $flasher,MailerInterface $mailer,$userID){
+    public function unbanUserAction(SweetAlertFactory $flasher, MailerInterface $mailer, $userID)
+    {
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($userID);
         $user->setUserstatus(1);
         $em = $this->getDoctrine()->getManager();
-        $em->persist( $user );
+        $em->persist($user);
         $em->flush();
         $flasher->addSuccess('User unbanned successfully!');
         $email = (new TemplatedEmail())
@@ -77,9 +81,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/show/{userID}", name="app_admin_show", methods={"GET"})
      */
-    public function show($userID,UserRepository $userRepository)
+    public function show($userID, UserRepository $userRepository)
     {
-        return $this->render('admin/ListUser.html.twig',[
+        return $this->render('admin/ListUser.html.twig', [
             'user' => $userRepository->find($userID)
         ]);
     }
@@ -89,14 +93,14 @@ class AdminController extends AbstractController
     /**
      *
      * @Route("/{iduser}", name="app_admin_delete", methods={"POST"})
-
-    public function delete(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getIduser(), $request->request->get('_token'))) {
-            $userRepository->remove($user);
-        }
-        return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
-    }
+     *
+     * public function delete(Request $request, User $user, UserRepository $userRepository): Response
+     * {
+     * if ($this->isCsrfTokenValid('delete'.$user->getIduser(), $request->request->get('_token'))) {
+     * $userRepository->remove($user);
+     * }
+     * return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
+     * }
      */
 
 
@@ -109,7 +113,6 @@ class AdminController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-
 
 
     /**
@@ -156,9 +159,9 @@ class AdminController extends AbstractController
      */
     public function validerCommande(int                $id,
                                     CommandeRepository $commandeRepository,
-                                    ManagerRegistry    $managerRegistry)
+                                    ManagerRegistry    $managerRegistry,
+                                    UserRepository     $userRepository)
     {
-
 
 
         $manager = $managerRegistry->getManager();
@@ -166,7 +169,12 @@ class AdminController extends AbstractController
         $commande->setEtat("Validé");
         $manager->persist($commande);
         $manager->flush();
-        return $this->render('admin/index.html.twig', []);
+
+        $users = $userRepository->findAll();
+        return $this->render('admin/index.html.twig', [
+            'users'=>$users
+        ]);
+
     }
 
     /**
@@ -174,7 +182,8 @@ class AdminController extends AbstractController
      */
     public function refuserCommande(int                $id,
                                     CommandeRepository $commandeRepository,
-                                    ManagerRegistry    $managerRegistry)
+                                    ManagerRegistry    $managerRegistry,
+                                    UserRepository     $userRepository)
     {
 
         $manager = $managerRegistry->getManager();
@@ -182,7 +191,10 @@ class AdminController extends AbstractController
         $commande->setEtat("Refusé");
         $manager->persist($commande);
         $manager->flush();
-        return $this->redirectToRoute('app_admin');
+        $users = $userRepository->findAll();
+        return $this->render('admin/index.html.twig', [
+            'users'=>$users
+        ]);
 
     }
 }
